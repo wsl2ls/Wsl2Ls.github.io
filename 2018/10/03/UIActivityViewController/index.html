@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,UIActivityViewController,分享,社交," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="利用UIActivityViewController实现系统原生分享，不需要三方SDK，支持自定义分享，可以分享到微博、微信、QQ、信息、邮件、备忘录、通讯录、剪贴板、FaceBook…..等等  示例Github   注意：iOS10之前需要在系统设置中登陆Facebook和twwiter账号才能分享，iOS10之后就不 支持原生分享facebook和twwiter了，需要嵌入官方的sdk，自">
+<meta name="keywords" content="iOS,UIActivityViewController,分享,社交">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIActivityViewController系统原生分享-仿简书分享">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/UIActivityViewController/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="利用UIActivityViewController实现系统原生分享，不需要三方SDK，支持自定义分享，可以分享到微博、微信、QQ、信息、邮件、备忘录、通讯录、剪贴板、FaceBook…..等等  示例Github   注意：iOS10之前需要在系统设置中登陆Facebook和twwiter账号才能分享，iOS10之后就不 支持原生分享facebook和twwiter了，需要嵌入官方的sdk，自">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-2417de6295f29f14.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-75e976664d6b63c3.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-71dcf1ba4ecfcdef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-0c218b4b69db52b3.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-03T10:07:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIActivityViewController系统原生分享-仿简书分享">
+<meta name="twitter:description" content="利用UIActivityViewController实现系统原生分享，不需要三方SDK，支持自定义分享，可以分享到微博、微信、QQ、信息、邮件、备忘录、通讯录、剪贴板、FaceBook…..等等  示例Github   注意：iOS10之前需要在系统设置中登陆Facebook和twwiter账号才能分享，iOS10之后就不 支持原生分享facebook和twwiter了，需要嵌入官方的sdk，自">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1708447-2417de6295f29f14.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/UIActivityViewController/"/>
+
+
+
+
+
+  <title>UIActivityViewController系统原生分享-仿简书分享 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/UIActivityViewController/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UIActivityViewController系统原生分享-仿简书分享</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:04:58+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>利用UIActivityViewController实现系统原生分享，不需要三方SDK，支持自定义分享，可以分享到微博、微信、QQ、信息、邮件、备忘录、通讯录、剪贴板、FaceBook…..等等  <a href="https://github.com/wslcmk/UIActivityViewController.git" target="_blank" rel="noopener">示例Github</a></p>
+</blockquote>
+<blockquote>
+<p>注意：iOS10之前需要在系统设置中登陆Facebook和twwiter账号才能分享，iOS10之后就不 支持原生分享facebook和twwiter了，需要嵌入官方的sdk，自定义UIActivity才行。</p>
+</blockquote>
+<p>效果图，诸位请看：<br><img src="http://upload-images.jianshu.io/upload_images/1708447-2417de6295f29f14.gif?imageMogr2/auto-orient/strip" alt="效果1.gif"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-75e976664d6b63c3.gif?imageMogr2/auto-orient/strip" alt="效果2.gif"></p>
+<p>接下来介绍UIActivityViewController：<a href="https://github.com/wslcmk/UIActivityViewController.git" target="_blank" rel="noopener">Demo里也注释的很清楚</a></p>
+<ol>
+<li>创建要分享的数据内容，加在一个数组 ActivityItems里。<br>NSString <em>textToShare = @”我是且行且珍惜_iOS，欢迎关注我！”;<br>UIImage </em>imageToShare = [UIImage imageNamed:@”wang.png”];<br>NSURL <em>urlToShare = [NSURL URLWithString:@”<a href="https://github.com/wslcmk&quot;]" target="_blank" rel="noopener">https://github.com/wslcmk&quot;]</a>;<br>NSArray </em>activityItems = @[urlToShare,textToShare,imageToShare];<br>//自定义 customActivity继承于UIActivity,创建自定义的Activity加在数组Activities中。<br>customActivity <em> custom = [[customActivity alloc] initWithTitie:@”且行且珍惜_iOS” withActivityImage:[UIImage imageNamed:@”wang”] withUrl:urlToShare withType:@”customActivity” withShareContext:activityItems];<br>NSArray </em>activities = @[custom];</li>
+</ol>
+<p>这里需要注意：不同的 Activity 类型所支持的数据类型不同，当不支持时，应用程序支持的系统服务按钮就不会出现，比如说打印、添加书签，，，，</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-71dcf1ba4ecfcdef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同的 Activity 类型所支持的数据类型.png"></p>
+<p>/**</p>
+<ol start="2">
+<li>//创建分享视图控制器，初始化UIActivityViewController</li>
+</ol>
+<p>ActivityItems  在执行activity中用到的数据对象数组。数组中的对象类型是可变的，并依赖于应用程序管理的数据。例如，数据可能是由一个或者多个字符串/图像对象，代表了当前选中的内容。</p>
+<p>Activities  是一个UIActivity对象的数组，代表了应用程序支持的自定义服务。这个参数可以是nil。<br>*/</p>
+<p>UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:activities];</p>
+<p>// 分享功能(Facebook, Twitter, 新浪微博, 腾讯微博…)需要你在手机上设置中心绑定了登录账户, 才能正常显示。<br>//关闭系统的一些Activity类型,不需要的功能关掉。<br>activityVC.excludedActivityTypes = @[UIActivityTypePostToVimeo ];</p>
+<p>//Activity 类型又分为“操作”和“分享”两大类<br>/<em><br>UIKIT_EXTERN NSString </em>const UIActivityTypePostToFacebook     NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString <em>const UIActivityTypePostToTwitter      NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString </em>const UIActivityTypePostToWeibo        NS_AVAILABLE_IOS(6_0);    //SinaWeibo<br>UIKIT_EXTERN NSString <em>const UIActivityTypeMessage            NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString </em>const UIActivityTypeMail               NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString <em>const UIActivityTypePrint              NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString </em>const UIActivityTypeCopyToPasteboard   NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString <em>const UIActivityTypeAssignToContact    NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString </em>const UIActivityTypeSaveToCameraRoll   NS_AVAILABLE_IOS(6_0);<br>UIKIT_EXTERN NSString <em>const UIActivityTypeAddToReadingList   NS_AVAILABLE_IOS(7_0);<br>UIKIT_EXTERN NSString </em>const UIActivityTypePostToFlickr       NS_AVAILABLE_IOS(7_0);<br>UIKIT_EXTERN NSString <em>const UIActivityTypePostToVimeo        NS_AVAILABLE_IOS(7_0);<br>UIKIT_EXTERN NSString </em>const UIActivityTypePostToTencentWeibo NS_AVAILABLE_IOS(7_0);<br>UIKIT_EXTERN NSString <em>const UIActivityTypeAirDrop            NS_AVAILABLE_IOS(7_0);
+</em>/</p>
+<ol start="3">
+<li>//判断系统版本,初始化点击回调方法<br>if([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 8.0){<br>//初始化Block回调方法,此回调方法是在iOS8之后出的，代替了之前的方法<br>UIActivityViewControllerCompletionWithItemsHandler myBlock = ^(NSString <em>activityType,BOOL completed,NSArray </em>returnedItems,NSError *activityError)<br>{<br>NSLog(@”activityType :%@”, activityType);<br>if (completed)<br>{<br>NSLog(@”completed”);<br>}<br>else<br>{<br>NSLog(@”cancel”);<br>}</li>
+</ol>
+<p>};</p>
+<p>// 初始化completionHandler，当post结束之后（无论是done还是cancell）该blog都会被调用<br>activityVC.completionWithItemsHandler = myBlock;<br>}else{<br>//此Block回调方法在iOS8.0之后就弃用了，被上面的所取代<br>UIActivityViewControllerCompletionHandler myBlock = ^(NSString *activityType,BOOL completed)<br>{<br>NSLog(@”activityType :%@”, activityType);<br>if (completed)<br>{<br>NSLog(@”completed”);<br>}<br>else<br>{<br>NSLog(@”cancel”);<br>}</p>
+<p>};<br>// 初始化completionHandler，当post结束之后（无论是done还是cancell）该blog都会被调用<br>activityVC.completionHandler = myBlock;<br>}</p>
+<ol start="4">
+<li>//在展现view controller时，必须根据当前的设备类型，使用适当的方法。在iPad上，必须通过popover来展现view controller。在iPhone和iPodtouch上，必须以模态的方式展现。<br>[self presentViewController:activityVC animated:YES completion:nil];</li>
+</ol>
+<p>接下来介绍几个系统Activity 类型的API，用于自定义title、Image的时候用。</p>
+<ul>
+<li>(void)SystemAPI{</li>
+</ul>
+<p>//复制链接功能<br>UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];<br>pasteboard.string = @”需要复制的内容”;</p>
+<p>//用safari打开网址<br>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@”<a href="https://github.com/wslcmk&quot;]]" target="_blank" rel="noopener">https://github.com/wslcmk&quot;]]</a>;</p>
+<p>//保存图片到相册<br>UIImage <em>image = [UIImage imageNamed:@”wang”];<br>id completionTarget = self;<br>SEL completionSelector = @selector(didWriteToSavedPhotosAlbum);<br>void </em>contextInfo = NULL;<br>UIImageWriteToSavedPhotosAlbum(image, completionTarget, completionSelector, contextInfo);</p>
+<p>//添加书签<br>NSURL *URL = [NSURL URLWithString:@”<a href="https://github.com/wslcmk&quot;]" target="_blank" rel="noopener">https://github.com/wslcmk&quot;]</a>;<br>BOOL result = [[SSReadingList defaultReadingList] addReadingListItemWithURL:URL<br>title:@”WSL”<br>previewText:@”且行且珍惜_iOS”<br>error:nil];<br>if (result) {<br>NSLog(@”添加书签成功”);<br>}</p>
+<p>//发送短信<br>MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];<br>messageComposeViewController.recipients = @[@”且行且珍惜_iOS”];<br>//messageComposeViewController.delegate = self;<br>messageComposeViewController.body = @”你好，我是且行且珍惜_iOS，请多指教！”;<br>messageComposeViewController.subject = @”且行且珍惜_iOS”;</p>
+<p>//发送邮件<br>MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];<br>[mailComposeViewController setToRecipients:@[@”mattt@nshipster•com”]];<br>[mailComposeViewController setSubject:@”WSL”];<br>[mailComposeViewController setMessageBody:@”Lorem ipsum dolor sit amet”<br>isHTML:NO];<br>if([MFMailComposeViewController  canSendMail]){<br>[self presentViewController:mailComposeViewController animated:YES completion:nil];<br>};</p>
+<p>//发送推文<br>TWTweetComposeViewController *tweetComposeViewController =<br>[[TWTweetComposeViewController alloc] init];<br>[tweetComposeViewController setInitialText:@”梦想还是要有的,万一实现了呢!—–且行且珍惜_iOS”];<br>[tweetComposeViewController addURL:[NSURL URLWithString:@”<a href="https://github.com/wslcmk&quot;]]" target="_blank" rel="noopener">https://github.com/wslcmk&quot;]]</a>;<br>[tweetComposeViewController addImage:[UIImage imageNamed:@”wang”]];<br>if ([TWTweetComposeViewController canSendTweet]) {<br>[self presentViewController:tweetComposeViewController animated:YES completion:nil];<br>}<br>}<br>接下来介绍自定义UIActivity，主要就是重写了以下方法：</p>
+<ul>
+<li>(UIActivityCategory)activityCategory{<br>// 决定在UIActivityViewController中显示的位置，最上面是AirDrop，中间是Share，下面是Action<br>return UIActivityCategoryAction;}</li>
+</ul>
+<ul>
+<li><p>(NSString *)activityType{<br>return _type;}</p>
+</li>
+<li><p>(NSString *)activityTitle {<br>return _title;}</p>
+</li>
+<li><p>(UIImage <em>)_activityImage {<br>//这个得注意，当self.activityCategory = UIActivityCategoryAction时，系统默认会渲染图片，所以不能重写为 - (UIImage </em>)activityImage {return _image;}<br>return _image;}</p>
+</li>
+<li><p>(NSURL *)activityUrl{<br>return _url;}</p>
+</li>
+<li><p>(BOOL)canPerformWithActivityItems:(NSArray *)activityItems {<br>return YES;}</p>
+</li>
+<li><p>(void)prepareWithActivityItems:(NSArray *)activityItems {<br>//准备分享所进行的方法，通常在这个方法里面，把item中的东西保存下来,items就是要传输的数据。;}</p>
+</li>
+<li><p>(void)performActivity {<br>//这里就可以关联外面的app进行分享操作了<br>//也可以进行一些数据的保存等操作<br>//操作的最后必须使用下面方法告诉系统分享结束了<br>[self activityDidFinish:YES];}</p>
+</li>
+</ul>
+<p><a href="https://github.com/wslcmk/UIActivityViewController.git" target="_blank" rel="noopener">需要Demo请戳我</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-0c218b4b69db52b3.gif?imageMogr2/auto-orient/strip" alt="亲，赞一下，给个star.gif"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/UIActivityViewController/" rel="tag"># UIActivityViewController</a>
+          
+            <a href="/tags/分享/" rel="tag"># 分享</a>
+          
+            <a href="/tags/社交/" rel="tag"># 社交</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/30/postName/" rel="next" title="Xcode炫酷插件">
+                <i class="fa fa-chevron-left"></i> Xcode炫酷插件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
