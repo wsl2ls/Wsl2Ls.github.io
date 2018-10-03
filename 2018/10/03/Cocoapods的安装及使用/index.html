@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,Cocoapods," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="###简介  Cocoapods是OS X和iOS下的一个第三方库管理工具，并且支持Objective-C和swifit语言。通过Cocoapods为项目添加称为”Pods”的依赖库（这些库必须是Cocoapods所支持的），并且轻松实现第三方库的版本管理。引入Cocoapods的意义：Cocoapods在引入第三方库时自动为我们完成各种配置，包括配置编译阶段、连接器选项、甚至是ARC环境下的-f">
+<meta name="keywords" content="iOS,Cocoapods">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocoapods的安装及使用">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/Cocoapods的安装及使用/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="###简介  Cocoapods是OS X和iOS下的一个第三方库管理工具，并且支持Objective-C和swifit语言。通过Cocoapods为项目添加称为”Pods”的依赖库（这些库必须是Cocoapods所支持的），并且轻松实现第三方库的版本管理。引入Cocoapods的意义：Cocoapods在引入第三方库时自动为我们完成各种配置，包括配置编译阶段、连接器选项、甚至是ARC环境下的-f">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-d93a20e2b127a901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-02c975b835a34662.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-213bcf7e3af0f6d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-35ea11f93118a55a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-58992ad9c7be3c17.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-443bf98d8815a8e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-9d6cc0633b5b9d35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-cffbbd45f09ee3e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-ba32f58a7793eab5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-16f5efb057e1793a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-df7cfdc40c84e863.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-489333f39f68a678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-dd2bcfc9988b0c50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-d587dc230cba7da9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-e6cd287325d03aca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-f0403022250a9df5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-8dac74f1e1268564.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-195a4c03d5a9ec39.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-03T10:28:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocoapods的安装及使用">
+<meta name="twitter:description" content="###简介  Cocoapods是OS X和iOS下的一个第三方库管理工具，并且支持Objective-C和swifit语言。通过Cocoapods为项目添加称为”Pods”的依赖库（这些库必须是Cocoapods所支持的），并且轻松实现第三方库的版本管理。引入Cocoapods的意义：Cocoapods在引入第三方库时自动为我们完成各种配置，包括配置编译阶段、连接器选项、甚至是ARC环境下的-f">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1708447-d93a20e2b127a901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/Cocoapods的安装及使用/"/>
+
+
+
+
+
+  <title>Cocoapods的安装及使用 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/Cocoapods的安装及使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cocoapods的安装及使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:27:16+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###简介</p>
+<blockquote>
+<p>Cocoapods是OS X和iOS下的一个第三方库管理工具，并且支持Objective-C和swifit语言。通过Cocoapods为项目添加称为”Pods”的依赖库（这些库必须是Cocoapods所支持的），并且轻松实现第三方库的版本管理。<br>引入Cocoapods的意义：Cocoapods在引入第三方库时自动为我们完成各种配置，包括配置编译阶段、连接器选项、甚至是ARC环境下的-fno-objc-arc配置等；Cocoapods可以很方便的查找第三方库，可以快速方便的寻找到优秀的第三方库以及它们的各种信息。<br>原理：CocoaPods的原理是将所有的依赖库都放到另一个名为Pods的项目中，然后让主项目依赖Pods项目，这样，源码管理工作都从主项目移到了Pods项目中。Pods项目最终会编译成一个名为libPods.a的文件，主项目只需要依赖这个.a文件即可。<br>Cocoapods 官方网站：<br><a href="https://cocoapods.org/" target="_blank" rel="noopener">https://cocoapods.org/</a><br>Cocoapods整个项目托管在github上， 所有的Pods依赖库也都依赖github<br><a href="https://link.jianshu.com?t=https://github.com/CocoaPods" target="_blank" rel="noopener">https://github.com/CocoaPods</a></p>
+</blockquote>
+<p>####一、 配置Ruby环境，安装CocoaPods</p>
+<ul>
+<li><p>CocoaPods是基于ruby ecosystem的，需要ruby环境，使用ruby的gem命令。所以我们的系统要有ruby环境。然而Mac系统默认会安装好ruby环境。可在终端ruby -v查看ruby版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//查看ruby版本</span><br><span class="line">ruby -v</span><br><span class="line">//输出信息</span><br><span class="line">ruby 2.0.0p648 (2015-12-16 revision 53162) [universal.x86_64-darwin15]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开终端，依次执行输入的部分命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo gem update --system      //升级Ruby环境*</span><br><span class="line">gem sources -l                               // 查看源列表</span><br><span class="line">gem sources -remove https://rubygems.org/     // 将不需要的源移除掉</span><br><span class="line">gem sources -a https://gems.ruby-china.org/      // 添加ruby-china源源(当然你有其他可用的源也可以)</span><br><span class="line">sudo gem install cocoapods           // 安装cocoapods，需要输入用户密码，输入完成后，按回车键，需要等待许久后才能完成安装，成功安装后会有提示</span><br><span class="line">pod --version       //查看是否安装成功，如果成功会显示pod的版本</span><br><span class="line">pod setup   //这条命令是将Github上的开源库https://github.com/CocoaPods/Specs.git托管的Podspec索引文件都下载到本地 ，花费时间比较久，</span><br><span class="line">pod search AFNetworking    // 搜索AFNetworking库</span><br><span class="line">sudo gem uninstall cocoapods    //卸载CocoaPods</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>终端命令截图：<br><img src="https://upload-images.jianshu.io/upload_images/1708447-d93a20e2b127a901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="终端命令.png"><br><img src="https://upload-images.jianshu.io/upload_images/1708447-02c975b835a34662.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="当前CocoaPods版本"></p>
+<blockquote>
+<p>执行pod setup ，这条命令是将Github上的开源库<a href="https://github.com/CocoaPods/Specs.git托管的Podspec索引文件都下载到本地的~/.cocoapods/repos/master/路径下" target="_blank" rel="noopener">https://github.com/CocoaPods/Specs.git托管的Podspec索引文件都下载到本地的~/.cocoapods/repos/master/路径下</a> ，花费时间比较久，所以可以选择直接从别的地方拷贝一份放到对应的目录下，或者手动去Github下载，下载完成后放到对应的目录下。</p>
+</blockquote>
+<ul>
+<li>通过如下终端命令下载到对应的位置，可以看到下载进度。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd  ~/.cocoapods/repos/master/ </span><br><span class="line">git clone https://github.com/CocoaPods/Specs.git</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-213bcf7e3af0f6d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="终端命令下载"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-35ea11f93118a55a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="cocoapods文件目录.png"></p>
+<ul>
+<li>搜索第三方库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search AFNetworking</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-58992ad9c7be3c17.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="搜索失败"></p>
+<blockquote>
+<p>搜索第三方库如果出现了上述错误，可以执行<br>rm ~/Library/Caches/CocoaPods/search_index.json来删除本地旧的search_index.json文件，<br>然后再次输入pod search AFNetworking进行搜索，pod search 命令会先查看有无search_index.json文件，如果不存在该文件，会自动根据master文件夹生成一个新的search_index.json文件，<br>这时会提示Creating search index for spec repo ‘master’..，然后就耐心等待吧…….成功了之后就如下图：</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-443bf98d8815a8e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="搜索成功会显示类库的信息"></p>
+<hr>
+<p>####二、安装成功，使用CocoaPods</p>
+<blockquote>
+<p>在使用CocoaPods之后，我只需要将用到的第三方开源库放到一个名为Podfile的文件中，然后执行pod install。CocoaPods就会自动将这些第三方开源库的源码下载下来，并且为我的工程设置好相应的系统依赖和编译参数。</p>
+<ul>
+<li>使用时需要新建一个名为 Podfile 的配置文件，放在主项目的根目录下(与TestFramework.xcodeproj文件同一层级)，以我桌面上的TestFramework工程为例：</li>
+</ul>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-9d6cc0633b5b9d35.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例工程"><br>用终端命令新建Podfile文件到主项目目录(关于终端命令的使用可以看看这篇<a href="https://www.jianshu.com/p/9d10bb292f61" target="_blank" rel="noopener">Mac 终端命令大全</a>):</p>
+<h5 id="①-、-cd到项目总目录"><a href="#①-、-cd到项目总目录" class="headerlink" title="① 、 cd到项目总目录"></a>① 、 cd到项目总目录</h5><p><img src="https://upload-images.jianshu.io/upload_images/1708447-cffbbd45f09ee3e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h5 id="②、-创建Podfile配置文件"><a href="#②、-创建Podfile配置文件" class="headerlink" title="②、 创建Podfile配置文件"></a>②、 创建Podfile配置文件</h5><blockquote>
+<p>接着第①步，终端先执行vim Podfile命令 ，接着在键盘端输入 i，进入编辑模式，输入如下配置信息(也可以先跳过输入这一步，之后直接打开Podfile文件编辑)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">platform:ios,’8.0’     //平台ios,Deployment Target 8.0</span><br><span class="line">target “TestFramework&quot; do        //关联TestFramework.xcodeproj</span><br><span class="line">pod &apos;AFNetworking&apos;        //导入三方库</span><br><span class="line">pod &apos;MBProgressHUD&apos; </span><br><span class="line">pod &apos;MJExtension&apos;, &apos;~&gt; 3.0.13&apos;    //3.0.13是版本号</span><br><span class="line">end</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>然后按Esc，并且输入“ ：”号进入vim命令模式，然后输入wq，回车后就会发现TestFramework项目目录中多一个Podfile文件。</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-ba32f58a7793eab5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建Podfile配置文件"><br><img src="https://upload-images.jianshu.io/upload_images/1708447-16f5efb057e1793a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="编辑Podfile"><br><img src="https://upload-images.jianshu.io/upload_images/1708447-df7cfdc40c84e863.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="生成Podfile文件"></p>
+<h5 id="③-、-执行-pod-install-，生成管理三方库的Pods工程"><a href="#③-、-执行-pod-install-，生成管理三方库的Pods工程" class="headerlink" title="③ 、 执行 pod install ，生成管理三方库的Pods工程"></a>③ 、 执行 pod install ，生成管理三方库的Pods工程</h5><p><img src="https://upload-images.jianshu.io/upload_images/1708447-489333f39f68a678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="下载三方库"></p>
+<blockquote>
+<p>命令执行完成后，需要导入的第三方库都已经下载完成并且设置好了编译参数和依赖，同时你需要注意：</p>
+<ul>
+<li>使用 CocoaPods 生成的 TestFramework.xcworkspace 文件来打开工程，而不是以前的 TestFramework.xcodeproj 文件；<ul>
+<li>当需要更改Podfile文件配置信息时 ，比如删除或者增加三方库 ，直接编辑Podfile文件， 每次更改了 Podfile 文件后，你需要重新执行一次pod install命令，别忘了要cd 到Podfile文件所在目录。</li>
+</ul>
+</li>
+<li>第三方库们都有人在维护升级，当我们需要更新下第三方库的版本时，就需要终端执行命令pod update。</li>
+</ul>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-dd2bcfc9988b0c50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="生成TestFramework.xcworkspace"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-d587dc230cba7da9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开TestFramework.xcworkspace"></p>
+<ul>
+<li>删除JSONKit库时的终端命令与Podfile文件：<br><img src="https://upload-images.jianshu.io/upload_images/1708447-e6cd287325d03aca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="删除JSONKit库时的终端命令与Podfile 文件"></li>
+</ul>
+<p>######关于 Podfile.lock （引自：<a href="http://blog.devtang.com/" title="唐巧的博客" target="_blank" rel="noopener">唐巧的博客</a>）</p>
+<blockquote>
+<p>当你执行<code>pod install</code>之后，除了 Podfile 外，CocoaPods 还会生成一个名为<code>Podfile.lock</code>的文件，Podfile.lock 应该加入到版本控制里面，不应该把这个文件加入到<code>.gitignore</code>中。因为<code>Podfile.lock</code>会锁定当前各依赖库的版本，之后如果多次执行<code>pod install</code> 不会更改版本，要<code>pod update</code>才会改<code>Podfile.lock</code>了。这样多人协作的时候，可以防止第三方库升级时造成大家各自的第三方库版本不一致。</p>
+</blockquote>
+<p>CocoaPods 的这篇 <a href="http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control" target="_blank" rel="noopener">官方文档</a> 也在<code>What is a Podfile.lock</code>一节中介绍了<code>Podfile.lock</code>的作用，并且指出：</p>
+<blockquote>
+<p>This file should always be kept under version control.</p>
+</blockquote>
+<p>####三、使用CocoaPods管理的三方库</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-f0403022250a9df5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="https://upload-images.jianshu.io/upload_images/1708447-8dac74f1e1268564.gif?imageMogr2/auto-orient/strip" alt="看着我的眼睛"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-195a4c03d5a9ec39.gif?imageMogr2/auto-orient/strip" alt="赞赞.gif"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Cocoapods/" rel="tag"># Cocoapods</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/二维码/" rel="next" title="iOS 封装原生二维码扫描和生成">
+                <i class="fa fa-chevron-left"></i> iOS 封装原生二维码扫描和生成
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/03/UIScrollView视觉差动画/" rel="prev" title="UIScrollView视觉差动画">
+                UIScrollView视觉差动画 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#①-、-cd到项目总目录"><span class="nav-number">1.</span> <span class="nav-text">① 、 cd到项目总目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#②、-创建Podfile配置文件"><span class="nav-number">2.</span> <span class="nav-text">②、 创建Podfile配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#③-、-执行-pod-install-，生成管理三方库的Pods工程"><span class="nav-number">3.</span> <span class="nav-text">③ 、 执行 pod install ，生成管理三方库的Pods工程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,音乐播放器,歌词解析,锁屏," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="LyricsAnalysis 功能描述：锁屏歌曲信息、控制台远程控制音乐播放：暂停/播放、上一首/下一首、快进/快退、锁屏状态下列表菜单弹框和拖拽控制台的进度条调节进度（结合了QQ音乐和网易云音乐在锁屏状态下的效果）、歌词解析并随音乐滚动显示。    第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放① 锁屏歌曲信息显示123456789101112131415161718192021222">
+<meta name="keywords" content="iOS,音乐播放器,歌词解析,锁屏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/音乐播放器/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="LyricsAnalysis 功能描述：锁屏歌曲信息、控制台远程控制音乐播放：暂停/播放、上一首/下一首、快进/快退、锁屏状态下列表菜单弹框和拖拽控制台的进度条调节进度（结合了QQ音乐和网易云音乐在锁屏状态下的效果）、歌词解析并随音乐滚动显示。    第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放① 锁屏歌曲信息显示123456789101112131415161718192021222">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-a83f7e40b01e4f50.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-72e0bb36ac035300.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-afcb25273e2ea214.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-db2d2d4cc57e27d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-7b19e1725fff23e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-285ef497840bff48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-b928a71e1d44addb.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-3da0ee93b6b68b8e.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-b1f62149a50920c9.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-03T10:42:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果">
+<meta name="twitter:description" content="LyricsAnalysis 功能描述：锁屏歌曲信息、控制台远程控制音乐播放：暂停/播放、上一首/下一首、快进/快退、锁屏状态下列表菜单弹框和拖拽控制台的进度条调节进度（结合了QQ音乐和网易云音乐在锁屏状态下的效果）、歌词解析并随音乐滚动显示。    第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放① 锁屏歌曲信息显示123456789101112131415161718192021222">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1708447-a83f7e40b01e4f50.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/音乐播放器/"/>
+
+
+
+
+
+  <title>iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/音乐播放器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:37:32+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="https://github.com/wslcmk/lyricsAnalysis" target="_blank" rel="noopener">LyricsAnalysis</a> 功能描述：锁屏歌曲信息、控制台远程控制音乐播放：暂停/播放、上一首/下一首、快进/快退、锁屏状态下列表菜单弹框和拖拽控制台的进度条调节进度（结合了QQ音乐和网易云音乐在锁屏状态下的效果）、歌词解析并随音乐滚动显示。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-a83f7e40b01e4f50.gif?imageMogr2/auto-orient/strip" alt="总效果预览图.gif"></p>
+<hr>
+<h1 id="第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放"><a href="#第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放" class="headerlink" title="第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放"></a>第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放</h1><h2 id="①-锁屏歌曲信息显示"><a href="#①-锁屏歌曲信息显示" class="headerlink" title="① 锁屏歌曲信息显示"></a>① 锁屏歌曲信息显示</h2><p><img src="http://upload-images.jianshu.io/upload_images/1708447-72e0bb36ac035300.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="iOS11以下锁屏信息预览"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">//展示锁屏歌曲信息：图片、歌词、进度、歌曲名、演唱者、专辑、（歌词是绘制在图片上的）</span><br><span class="line">- (void)showLockScreenTotaltime:(float)totalTime andCurrentTime:(float)currentTime andLyricsPoster:(BOOL)isShow&#123;</span><br><span class="line"></span><br><span class="line">NSMutableDictionary * songDict = [[NSMutableDictionary alloc] init];</span><br><span class="line">//设置歌曲题目</span><br><span class="line">[songDict setObject:@&quot;多幸运&quot; forKey:MPMediaItemPropertyTitle];</span><br><span class="line">//设置歌手名</span><br><span class="line">[songDict setObject:@&quot;韩安旭&quot; forKey:MPMediaItemPropertyArtist];</span><br><span class="line">//设置专辑名</span><br><span class="line">[songDict setObject:@&quot;专辑名&quot; forKey:MPMediaItemPropertyAlbumTitle];</span><br><span class="line">//设置歌曲时长</span><br><span class="line">[songDict setObject:[NSNumber numberWithDouble:totalTime]  forKey:MPMediaItemPropertyPlaybackDuration];</span><br><span class="line">//设置已经播放时长</span><br><span class="line">[songDict setObject:[NSNumber numberWithDouble:currentTime] forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];</span><br><span class="line"></span><br><span class="line">UIImage * lrcImage = [UIImage imageNamed:@&quot;backgroundImage5.jpg&quot;];</span><br><span class="line">if (isShow) &#123;</span><br><span class="line"></span><br><span class="line">//制作带歌词的海报</span><br><span class="line">if (!_lrcImageView) &#123;</span><br><span class="line">_lrcImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 480,800)];</span><br><span class="line">&#125;</span><br><span class="line">if (!_lockScreenTableView) &#123;</span><br><span class="line">_lockScreenTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 800 - 44 * 7 + 20, 480, 44 * 3) style:UITableViewStyleGrouped];</span><br><span class="line">_lockScreenTableView.dataSource = self;</span><br><span class="line">_lockScreenTableView.delegate = self;</span><br><span class="line">_lockScreenTableView.separatorStyle = NO;</span><br><span class="line">_lockScreenTableView.backgroundColor = [UIColor clearColor];</span><br><span class="line">[_lockScreenTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;cellID&quot;];</span><br><span class="line">&#125;</span><br><span class="line">//主要为了把歌词绘制到图片上，已达到更新歌词的目的</span><br><span class="line">[_lrcImageView addSubview:self.lockScreenTableView];</span><br><span class="line">_lrcImageView.image = lrcImage;</span><br><span class="line">_lrcImageView.backgroundColor = [UIColor blackColor];</span><br><span class="line"></span><br><span class="line">//获取添加了歌词数据的海报图片</span><br><span class="line">UIGraphicsBeginImageContextWithOptions(_lrcImageView.frame.size, NO, 0.0);</span><br><span class="line">CGContextRef context = UIGraphicsGetCurrentContext();</span><br><span class="line">[_lrcImageView.layer renderInContext:context];</span><br><span class="line">lrcImage = UIGraphicsGetImageFromCurrentImageContext();</span><br><span class="line">_lastImage = lrcImage;</span><br><span class="line">UIGraphicsEndImageContext();</span><br><span class="line"></span><br><span class="line">&#125;else&#123;</span><br><span class="line">if (_lastImage) &#123;</span><br><span class="line">lrcImage = _lastImage;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">//设置显示的海报图片</span><br><span class="line">[songDict setObject:[[MPMediaItemArtwork alloc] initWithImage:lrcImage]</span><br><span class="line">forKey:MPMediaItemPropertyArtwork];</span><br><span class="line">//加入正在播放媒体的信息中心</span><br><span class="line">[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:songDict];</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="②-远程控制音乐播放"><a href="#②-远程控制音乐播放" class="headerlink" title="② 远程控制音乐播放"></a>② 远程控制音乐播放</h2><p><img src="http://upload-images.jianshu.io/upload_images/1708447-afcb25273e2ea214.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="左侧列表菜单弹出框.PNG"><br>在此之前需先满足后台播放音乐的条件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//后台播放音频设置,需要在Capabilities-&gt;Background Modes中勾选Audio,Airplay,and Picture in Picture ，如下图1、2</span><br><span class="line">AVAudioSession *session = [AVAudioSession sharedInstance];</span><br><span class="line">[session setActive:YES error:nil];</span><br><span class="line">[session setCategory:AVAudioSessionCategoryPlayback error:nil];</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-db2d2d4cc57e27d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-7b19e1725fff23e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>
+<ul>
+<li>在iOS7.1之前, App如果需要在锁屏界面开启和监控远程控制事件,可以通过重写- (void)remoteControlReceivedWithEvent:(UIEvent *)event这个方法来捕获远程控制事件，并根据event.subtype来判别指令意图并作出反应。具体用法如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">//在具体的控制器或其它类中捕获处理远程控制事件,当远程控制事件发生时触发该方法, 该方法属于UIResponder类，iOS 7.1 之前经常用</span><br><span class="line">- (void)remoteControlReceivedWithEvent:(UIEvent *)event&#123;</span><br><span class="line">NSLog(@&quot;%ld&quot;,event.type);</span><br><span class="line">[[NSNotificationCenter defaultCenter] postNotificationName:@&quot;songRemoteControlNotification&quot; object:self userInfo:@&#123;@&quot;eventSubtype&quot;:@(event.subtype)&#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* iOS 7.1之前*/</span><br><span class="line">//让App开始接收远程控制事件, 该方法属于UIApplication类</span><br><span class="line">[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];</span><br><span class="line">//结束远程控制,需要的时候关闭</span><br><span class="line">//     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];</span><br><span class="line">//处理控制台的暂停/播放、上/下一首事件</span><br><span class="line">[[NSNotificationCenter defaultCenter] addObserverForName:@&quot;songRemoteControlNotification&quot; object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) &#123;</span><br><span class="line"></span><br><span class="line">NSInteger  eventSubtype = [notification.userInfo[@&quot;eventSubtype&quot;] integerValue];</span><br><span class="line">switch (eventSubtype) &#123;</span><br><span class="line">case UIEventSubtypeRemoteControlNextTrack:</span><br><span class="line">NSLog(@&quot;下一首&quot;);</span><br><span class="line">break;</span><br><span class="line">case UIEventSubtypeRemoteControlPreviousTrack:</span><br><span class="line">NSLog(@&quot;上一首&quot;);</span><br><span class="line">break;</span><br><span class="line">case  UIEventSubtypeRemoteControlPause:</span><br><span class="line">[self.player pause];</span><br><span class="line">break;</span><br><span class="line">case  UIEventSubtypeRemoteControlPlay:</span><br><span class="line">[self.player play];</span><br><span class="line">break;</span><br><span class="line">//耳机上的播放暂停</span><br><span class="line">case  UIEventSubtypeRemoteControlTogglePlayPause:</span><br><span class="line">NSLog(@&quot;播放或暂停&quot;);</span><br><span class="line">break;</span><br><span class="line">//后退</span><br><span class="line">case UIEventSubtypeRemoteControlBeginSeekingBackward:</span><br><span class="line">break;</span><br><span class="line">case UIEventSubtypeRemoteControlEndSeekingBackward:</span><br><span class="line">NSLog(@&quot;后退&quot;);</span><br><span class="line">break;</span><br><span class="line">//快进</span><br><span class="line">case UIEventSubtypeRemoteControlBeginSeekingForward:</span><br><span class="line">break;</span><br><span class="line">case UIEventSubtypeRemoteControlEndSeekingForward:</span><br><span class="line">NSLog(@&quot;前进&quot;);</span><br><span class="line">break;</span><br><span class="line">default:</span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在iOS7.1之后，出现了MPRemoteCommandCenter、MPRemoteCommand 及其相关的一些类 ，锁屏界面开启和监控远程控制事件就更方便了，而且还扩展了一些新功能：网易云音乐的列表菜单弹框功能和QQ音乐的拖拽控制台的进度条调节进度功能等等…..<br>官方文档：<a href="https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter" target="_blank" rel="noopener">https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">//锁屏界面开启和监控远程控制事件</span><br><span class="line">- (void)createRemoteCommandCenter&#123;</span><br><span class="line">/**/</span><br><span class="line">//远程控制命令中心 iOS 7.1 之后  详情看官方文档：https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter</span><br><span class="line"></span><br><span class="line">MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];</span><br><span class="line"></span><br><span class="line">//   MPFeedbackCommand对象反映了当前App所播放的反馈状态. MPRemoteCommandCenter对象提供feedback对象用于对媒体文件进行喜欢, 不喜欢, 标记的操作. 效果类似于网易云音乐锁屏时的效果</span><br><span class="line"></span><br><span class="line">//添加喜欢按钮</span><br><span class="line">MPFeedbackCommand *likeCommand = commandCenter.likeCommand;</span><br><span class="line">likeCommand.enabled = YES;</span><br><span class="line">likeCommand.localizedTitle = @&quot;喜欢&quot;;</span><br><span class="line">[likeCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">NSLog(@&quot;喜欢&quot;);</span><br><span class="line">return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">&#125;];</span><br><span class="line">//添加不喜欢按钮，假装是“上一首”</span><br><span class="line">MPFeedbackCommand *dislikeCommand = commandCenter.dislikeCommand;</span><br><span class="line">dislikeCommand.enabled = YES;</span><br><span class="line">dislikeCommand.localizedTitle = @&quot;上一首&quot;;</span><br><span class="line">[dislikeCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">NSLog(@&quot;上一首&quot;);</span><br><span class="line">return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">&#125;];</span><br><span class="line">//标记</span><br><span class="line">MPFeedbackCommand *bookmarkCommand = commandCenter.bookmarkCommand;</span><br><span class="line">bookmarkCommand.enabled = YES;</span><br><span class="line">bookmarkCommand.localizedTitle = @&quot;标记&quot;;</span><br><span class="line">[bookmarkCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">NSLog(@&quot;标记&quot;);</span><br><span class="line">return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">//    commandCenter.togglePlayPauseCommand 耳机线控的暂停/播放</span><br><span class="line"></span><br><span class="line">[commandCenter.pauseCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">[self.player pause];</span><br><span class="line">return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">&#125;];</span><br><span class="line">[commandCenter.playCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">[self.player play];</span><br><span class="line">return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">&#125;];</span><br><span class="line">//    [commandCenter.previousTrackCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">//        NSLog(@&quot;上一首&quot;);</span><br><span class="line">//        return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">//    &#125;];</span><br><span class="line"></span><br><span class="line">[commandCenter.nextTrackCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">NSLog(@&quot;下一首&quot;);</span><br><span class="line">return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">//快进</span><br><span class="line">//    MPSkipIntervalCommand *skipBackwardIntervalCommand = commandCenter.skipForwardCommand;</span><br><span class="line">//    skipBackwardIntervalCommand.preferredIntervals = @[@(54)];</span><br><span class="line">//    skipBackwardIntervalCommand.enabled = YES;</span><br><span class="line">//    [skipBackwardIntervalCommand addTarget:self action:@selector(skipBackwardEvent:)];</span><br><span class="line"></span><br><span class="line">//在控制台拖动进度条调节进度（仿QQ音乐的效果）</span><br><span class="line">[commandCenter.changePlaybackPositionCommand addTargetWithHandler:^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent * _Nonnull event) &#123;</span><br><span class="line">CMTime totlaTime = self.player.currentItem.duration;</span><br><span class="line">MPChangePlaybackPositionCommandEvent * playbackPositionEvent = (MPChangePlaybackPositionCommandEvent *)event;</span><br><span class="line">[self.player seekToTime:CMTimeMake(totlaTime.value*playbackPositionEvent.positionTime/CMTimeGetSeconds(totlaTime), totlaTime.timescale) completionHandler:^(BOOL finished) &#123;</span><br><span class="line">&#125;];</span><br><span class="line">return MPRemoteCommandHandlerStatusSuccess;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(void)skipBackwardEvent: (MPSkipIntervalCommandEvent *)skipEvent</span><br><span class="line">&#123;</span><br><span class="line">NSLog(@&quot;快进了 %f秒&quot;, skipEvent.interval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="第二部分：歌词解析"><a href="#第二部分：歌词解析" class="headerlink" title="第二部分：歌词解析"></a>第二部分：歌词解析</h1><p><img src="http://upload-images.jianshu.io/upload_images/1708447-285ef497840bff48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="歌词样式.png"></p>
+<ul>
+<li>根据上图的歌词样式，思路就是：先根据换行符“\n“分割字符串，获得包含每一行歌词字符串的数组，然后解析每一行歌词字符，获得时间点和对应的歌词，再用创建的歌词对象wslLrcEach来存储时间点和歌词，最后得到一个存储wslLrcEach对象的数组。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//每句歌词对象</span><br><span class="line">@interface wslLrcEach : NSObject</span><br><span class="line">@property(nonatomic, assign) NSUInteger time ;</span><br><span class="line">@property(nonatomic, copy) NSString * lrc ;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>接下来就是要让歌词随歌曲的进度来滚动显示,主要代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">self.tableView  显示歌词的</span><br><span class="line">currentTime  当前播放时间点</span><br><span class="line">self.currentRow  当前时间点歌词的位置</span><br><span class="line"></span><br><span class="line">//歌词滚动显示</span><br><span class="line">for ( int i = (int)(self.lrcArray.count - 1); i &gt;= 0 ;i--) &#123;</span><br><span class="line">wslLrcEach * lrc = self.lrcArray[i];</span><br><span class="line">if (lrc.time &lt; currentTime) &#123;</span><br><span class="line">self.currentRow = i;</span><br><span class="line">[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow: self.currentRow inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];</span><br><span class="line">[self.tableView reloadData];</span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<ul>
+<li>更新于2017/9/13  iOS11系统正式发布后 ， iOS11上不能像iOS11以下那样锁屏歌词和海报，iOS11把海报显示位置放到了左上方，而且大小变成了头像大小，可能是苹果为了锁屏界面的简洁，只保留了如下图的界面。</li>
+</ul>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-b928a71e1d44addb.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="iOS11网易云音乐锁屏界面.PNG"></p>
+<blockquote>
+<ul>
+<li>更新于2018/3/7 ：上面提到 iOS11系统上 ，不能像以往那样显示锁屏歌词了，那锁屏歌词该怎么显示呢，网易云音乐给出了如下图的设计：她是把当前唱到的歌词放到了锁屏的副标题处，随着播放的进度而改变。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[songDict setObject:@&quot;当前歌词&quot; forKey:MPMediaItemPropertyAlbumTitle];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-3da0ee93b6b68b8e.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网易云音乐锁屏歌词.PNG"></p>
+<blockquote>
+<ul>
+<li>更新于2018/8/2<br>最近有小猿反应了一个Bug：锁屏下暂停播放,过几秒再继续播放,进度条会跳一下,暂停越久跳越猛?<br>查阅资料后发现：我们知道 player 有个 rate 属性，表示播放速率，为 0 的时候表示暂停，为 1.0 的时候表示播放，而MPNowPlayingInfoCenter的nowPlayingInfo也有一个键值MPNowPlayingInfoPropertyPlaybackRate表示速率rate，但是它 与 self.player.rate 是不同步的，也就是说[self.player pause]暂停播放后的速率rate是0，但MPNowPlayingInfoPropertyPlaybackRate还是1，就会造成 在锁屏界面点击了暂停按钮，这个时候进度条表面看起来停止了走动，但是其实还是在计时，所以再点击播放的时候，锁屏界面进度条的光标会发生位置闪动， 所以我们需要在监听播放状态时同步播放速率给MPNowPlayingInfoPropertyPlaybackRate。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[songDict setObject:[NSNumber numberWithInteger:rate] forKey:MPNowPlayingInfoPropertyPlaybackRate];</span><br></pre></td></tr></table></figure>
+<p>好了，就说这么多了，demo中注释的还算是清楚的，感兴趣的可以去look  look😀😀！<br><a href="https://github.com/wslcmk/lyricsAnalysis" target="_blank" rel="noopener">GitHub：LyricsAnalysis</a>，觉得有帮助的话，别忘了给个star⭐️哈😀😀！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-b1f62149a50920c9.gif?imageMogr2/auto-orient/strip" alt="亲，赞一下，给个star.gif"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/音乐播放器/" rel="tag"># 音乐播放器</a>
+          
+            <a href="/tags/歌词解析/" rel="tag"># 歌词解析</a>
+          
+            <a href="/tags/锁屏/" rel="tag"># 锁屏</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/全屏侧滑手势-UIScrollView-UISlider间滑动手势冲突/" rel="next" title="iOS 屏侧滑手势/UIScrollView/UISlider间滑动手势冲突">
+                <i class="fa fa-chevron-left"></i> iOS 屏侧滑手势/UIScrollView/UISlider间滑动手势冲突
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/03/无限渐进轮播/" rel="prev" title="iOS 无限渐进轮播">
+                iOS 无限渐进轮播 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放"><span class="nav-number">1.</span> <span class="nav-text">第一部分：锁屏效果包括：锁屏歌曲信息和远程控制音乐播放</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#①-锁屏歌曲信息显示"><span class="nav-number">1.1.</span> <span class="nav-text">① 锁屏歌曲信息显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#②-远程控制音乐播放"><span class="nav-number">1.2.</span> <span class="nav-text">② 远程控制音乐播放</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分：歌词解析"><span class="nav-number">2.</span> <span class="nav-text">第二部分：歌词解析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

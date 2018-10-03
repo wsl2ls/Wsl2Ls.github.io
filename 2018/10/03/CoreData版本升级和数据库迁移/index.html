@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,CoreData,数据库," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言：最近ChinaDaily项目需要迭代一个新版本，在这个版本中CoreData数据库模型上有新增表、实体字段的增加，那么在用户覆盖安装程序时就必须要进行CoreData数据库的版本升级和旧数据迁移，如果仅仅是在旧版本的数据模型上进行上述操作，就会造成所有旧用户更新完成后的第一次启动崩溃。   数据迁移的方式有好几种，这里就先介绍我用的轻量级的数据迁移方式：Core Data轻量级迁移是适用于">
+<meta name="keywords" content="iOS,CoreData,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS CoreData(二)版本升级和数据库迁移">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/CoreData版本升级和数据库迁移/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="前言：最近ChinaDaily项目需要迭代一个新版本，在这个版本中CoreData数据库模型上有新增表、实体字段的增加，那么在用户覆盖安装程序时就必须要进行CoreData数据库的版本升级和旧数据迁移，如果仅仅是在旧版本的数据模型上进行上述操作，就会造成所有旧用户更新完成后的第一次启动崩溃。   数据迁移的方式有好几种，这里就先介绍我用的轻量级的数据迁移方式：Core Data轻量级迁移是适用于">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-cdce0b873731b155.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-135cd39165955739.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-7f76f3ef94fdcab2.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-e4504b889eb17843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-73ff008bb8c35bc5.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-03T10:47:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS CoreData(二)版本升级和数据库迁移">
+<meta name="twitter:description" content="前言：最近ChinaDaily项目需要迭代一个新版本，在这个版本中CoreData数据库模型上有新增表、实体字段的增加，那么在用户覆盖安装程序时就必须要进行CoreData数据库的版本升级和旧数据迁移，如果仅仅是在旧版本的数据模型上进行上述操作，就会造成所有旧用户更新完成后的第一次启动崩溃。   数据迁移的方式有好几种，这里就先介绍我用的轻量级的数据迁移方式：Core Data轻量级迁移是适用于">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1708447-cdce0b873731b155.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/CoreData版本升级和数据库迁移/"/>
+
+
+
+
+
+  <title>iOS CoreData(二)版本升级和数据库迁移 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/CoreData版本升级和数据库迁移/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS CoreData(二)版本升级和数据库迁移</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:17:55+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>前言：最近ChinaDaily项目需要迭代一个新版本，在这个版本中CoreData数据库模型上有新增表、实体字段的增加，那么在用户覆盖安装程序时就必须要进行CoreData数据库的版本升级和旧数据迁移，如果仅仅是在旧版本的数据模型上进行上述操作，就会造成所有旧用户更新完成后的第一次启动崩溃。</p>
+</blockquote>
+<ul>
+<li>数据迁移的方式有好几种，这里就先介绍我用的轻量级的数据迁移方式：Core Data轻量级迁移是适用于添加新表，添加新的实体，添加新的实体属性，等简单的，系统能自己推断出来的迁移方式。<br>接下来在我之前写的 <a href="https://www.jianshu.com/p/332cba029b95" target="_blank" rel="noopener">iOS CoreData (一) 增删改查</a> 示例基础上进行演示：<br>#####1、新建一个版本的数据库模型Model2：</li>
+<li>选中Model.xcdatamodeld文件，选择菜单editor-&gt;Add Model Version  取名为：Model2.xcdatamodel，然后就可以发现Model.xcdatamodeld目录下有两个版本的数据库模型<br><img src="http://upload-images.jianshu.io/upload_images/1708447-cdce0b873731b155.gif?imageMogr2/auto-orient/strip" alt="add model version.gif"><br>#####2、设置当前coreData的数据模型为Model2：</li>
+<li>选中Model.xcdatamodel或Model2.xcdatamodel，在左侧的Model Version 中选择Current模版为Model2<br><img src="http://upload-images.jianshu.io/upload_images/1708447-135cd39165955739.gif?imageMogr2/auto-orient/strip" alt="设置当前数据库版本.gif"><br>#####3、修改新数据模型Model2，在Model2上添加字段及表：</li>
+<li>从第2步 演示图中可以看到旧Model中的表和实体属性都自动迁移到了Model2中，新的表和实体属性我们可以直接在Model2上操作创建，但是别忘了删除原来的类文件，重新生成下新的实体类：<br><img src="http://upload-images.jianshu.io/upload_images/1708447-7f76f3ef94fdcab2.gif?imageMogr2/auto-orient/strip" alt="修改新数据模型Model2.gif"></li>
+</ul>
+<p>#####4、设置数据库参数options，打开数据库升级迁移的开关。</p>
+<ul>
+<li>把方法- (nullable __kindof NSPersistentStore <em>)addPersistentStoreWithType:(NSString </em>)storeType configuration:(nullable NSString <em>)configuration URL:(nullable NSURL </em>)storeURL options:(nullable NSDictionary *)options error:(NSError **)error中的options参数置为如下的options字典<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//创建持久化存储助理：数据库</span><br><span class="line">NSPersistentStoreCoordinator * store = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];</span><br><span class="line"></span><br><span class="line">//请求自动轻量级迁移</span><br><span class="line">NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:</span><br><span class="line">[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,</span><br><span class="line">[NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,</span><br><span class="line">nil];</span><br><span class="line">NSError *error = nil;</span><br><span class="line">//设置数据库相关信息 添加一个持久化存储库并设置存储类型和路径，NSSQLiteStoreType：SQLite作为存储库</span><br><span class="line">[store addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:sqlUrl options:options error:&amp;error];</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>这里说一下新增加的2个参数的意义：<br>NSMigratePersistentStoresAutomaticallyOption = YES，那么Core Data会试着把之前低版本的出现不兼容的持久化存储区迁移到新的模型中，这里的例子里，Core Data就能识别出是新表，就会新建出新表的存储区来。<br>NSInferMappingModelAutomaticallyOption = YES,这个参数的意义是Core Data会根据自己认为最合理的方式去尝试MappingModel，从源模型实体的某个属性，映射到目标模型实体的某个属性。</p>
+</blockquote>
+<p>#####5、编译结束，CoreData调试:</p>
+<p>打开Product，选择Edit Scheme.<br>选择Arguments，在下面的ArgumentsPassed On Launch中添加下面两个选项，如图：<br>(1)-com.apple.CoreData.SQLDebug<br>(2)1</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-e4504b889eb17843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="CoreData调试.png"></p>
+<p>之前相关文章：<a href="https://www.jianshu.com/p/332cba029b95" target="_blank" rel="noopener">iOS CoreData (一) 增删改查</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-73ff008bb8c35bc5.gif?imageMogr2/auto-orient/strip" alt="赞赞.gif"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/CoreData/" rel="tag"># CoreData</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/CoreData增删改查/" rel="next" title="iOS CoreData (一) 增删改查">
+                <i class="fa fa-chevron-left"></i> iOS CoreData (一) 增删改查
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/03/指南针/" rel="prev" title="iOS 仿系统指南针">
+                iOS 仿系统指南针 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

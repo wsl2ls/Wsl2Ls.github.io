@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,UIScrollView,UISlider,手势冲突," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、前期准备 有一个支持全屏侧滑返回的视图控制器ViewController，ViewController.view上有一个UIScrollView，UIScrollView上有UISlider。俺直接在之前的示例Demo上演示，简书地址：iOS 自定义转场动画 ，Github地址 ：WSLTransferAnimation   二、问题展示 现象 1、UIScrollView当前在第一页即c">
+<meta name="keywords" content="iOS,UIScrollView,UISlider,手势冲突">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 屏侧滑手势&#x2F;UIScrollView&#x2F;UISlider间滑动手势冲突">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/全屏侧滑手势-UIScrollView-UISlider间滑动手势冲突/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="一、前期准备 有一个支持全屏侧滑返回的视图控制器ViewController，ViewController.view上有一个UIScrollView，UIScrollView上有UISlider。俺直接在之前的示例Demo上演示，简书地址：iOS 自定义转场动画 ，Github地址 ：WSLTransferAnimation   二、问题展示 现象 1、UIScrollView当前在第一页即c">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-3ef7a155b61b3616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-83ae3654030d8414.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-a9eacdbc7092ff36.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-dd07d227fe222ecb.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-418b5c5d99e7de6c.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-9652702e9c19bc57.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-03c8b6f0c64ef56d.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-03T10:36:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 屏侧滑手势&#x2F;UIScrollView&#x2F;UISlider间滑动手势冲突">
+<meta name="twitter:description" content="一、前期准备 有一个支持全屏侧滑返回的视图控制器ViewController，ViewController.view上有一个UIScrollView，UIScrollView上有UISlider。俺直接在之前的示例Demo上演示，简书地址：iOS 自定义转场动画 ，Github地址 ：WSLTransferAnimation   二、问题展示 现象 1、UIScrollView当前在第一页即c">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1708447-3ef7a155b61b3616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/全屏侧滑手势-UIScrollView-UISlider间滑动手势冲突/"/>
+
+
+
+
+
+  <title>iOS 屏侧滑手势/UIScrollView/UISlider间滑动手势冲突 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/全屏侧滑手势-UIScrollView-UISlider间滑动手势冲突/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 屏侧滑手势/UIScrollView/UISlider间滑动手势冲突</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:36:08+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/1708447-3ef7a155b61b3616.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="七夕节福利"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-83ae3654030d8414.gif?imageMogr2/auto-orient/strip" alt="效果预览"></p>
+<h4 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h4><blockquote>
+<p>有一个支持全屏侧滑返回的视图控制器ViewController，ViewController.view上有一个UIScrollView，UIScrollView上有UISlider。俺直接在之前的示例Demo上演示，简书地址：<a href="https://www.jianshu.com/p/a9b1307b305b" target="_blank" rel="noopener">iOS 自定义转场动画</a> ，Github地址 ：<a href="https://github.com/wslcmk/WSLTransferAnimation.git" target="_blank" rel="noopener">WSLTransferAnimation</a> </p>
+</blockquote>
+<h4 id="二、问题展示"><a href="#二、问题展示" class="headerlink" title="二、问题展示"></a>二、问题展示</h4><ul>
+<li><strong>现象 1</strong>、<em>UIScrollView当前在第一页即contentOffset.x=0时，左滑不能触发全屏侧滑pop返回的手势</em> ；</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-a9eacdbc7092ff36.gif?imageMogr2/auto-orient/strip" alt="UIScrollView和全屏侧滑pop返回手势冲突示意图"></p>
+<ul>
+<li><strong>现象2</strong> 、<em>问题1解决后，你会发现拖拽UIScrollView第一页上的UISlider时，向右拖拽时却触发了全屏侧滑pop返回的手势，而UISlider本身的拖拽事件却没有响应；向左拖拽UISlider时，响应的是UIScrollView的拖动事件，而UISlider本身的拖拽事件也没有响应</em>。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-dd07d227fe222ecb.gif?imageMogr2/auto-orient/strip" alt="UISlider与UIScrollView、全屏侧滑pop返回手势冲突示意图"></p>
+<ul>
+<li><strong>现象3</strong> 、<em>当你长按UISlider超过150ms后直接拖拽，就不存在现象2中UISlider与UIScrollView、全屏侧滑返回的冲突问题了</em>。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-418b5c5d99e7de6c.gif?imageMogr2/auto-orient/strip" alt="手势冲突.gif"></p>
+<h4 id="三、分析解决问题"><a href="#三、分析解决问题" class="headerlink" title="三、分析解决问题"></a>三、分析解决问题</h4><blockquote>
+<p>这些问题很显然，肯定跟iOS事件的传递和响应链机制有关系，不了解的可以看看这篇文章 <a href="https://www.jianshu.com/p/2e074db792ba" target="_blank" rel="noopener">史上最详细的iOS之事件的传递和响应机制-原理篇</a>或者<a href="https://www.jianshu.com/p/c294d1bd963d" target="_blank" rel="noopener">iOS响应链全家桶</a></p>
+</blockquote>
+<ul>
+<li><strong>分析解决问题 1</strong><br><em>如果你了解事件的传递和响应链机制的话，应该能想到，是由于UIScrollView的内部手势方法阻断了全屏侧滑返回手势的的响应，那我们就找到这个方法，代码如下</em> ；</li>
+</ul>
+<blockquote>
+<p>创建一个UIScrollView的类别UIScrollView+GestureConflict，重写如下方法：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//处理UIScrollView上的手势和侧滑返回手势的冲突</span><br><span class="line">-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer&#123;</span><br><span class="line"></span><br><span class="line">// 首先判断otherGestureRecognizer是不是系统pop手势</span><br><span class="line">if ([otherGestureRecognizer.view isKindOfClass:NSClassFromString(@&quot;UILayoutContainerView&quot;)]) &#123;</span><br><span class="line">// 再判断系统手势的state是began还是fail，同时判断scrollView的位置是不是正好在最左边</span><br><span class="line">if (otherGestureRecognizer.state == UIGestureRecognizerStateBegan &amp;&amp; self.contentOffset.x == 0) &#123;</span><br><span class="line">return YES;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>分析解决问题 2和3</strong>  </li>
+</ul>
+<p><em>方案一：这个跟UIScrollView的一个属性delaysContentTouches有关。</em></p>
+<blockquote>
+<p> scrollView.delaysContentTouches = NO;<br>delaysContentTouches 默认值为YES 表示延迟scrollView上子视图的响应，所以当直接拖动UISlider时，如果此时touch时间在150ms以内，UIScrollView会认为是拖动自己，从而拦截了event，导致UISlider接收不到滑动的event。但是只要长按住UISlider一会儿再拖动，此时touch时间超过150ms，因此滑动的event会发送到UISlider上，然后UISlider再作出响应；设置为NO后，拖动UISlider时就可以直接做出响应，解决了UISlider与UIScrollView之间的冲突，同时也解决了向右拖拽时却触发了全屏侧滑pop返回的问题。</p>
+</blockquote>
+<p><em>方案二： 重写类别UIScrollView+GestureConflict中的如下方法来解决UISlider与UIScrollView之间的冲突，然后还需要执行下面 **</em>问题补充<em>** 中的操作来处理UISlider的滑动与全屏侧滑pop返回事件的冲突。</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//拦截事件的处理 事件传递给谁，就会调用谁的hitTest:withEvent:方法。</span><br><span class="line">//处理UISlider的滑动与UIScrollView的滑动事件冲突</span><br><span class="line">- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event &#123;</span><br><span class="line">/*</span><br><span class="line">直接拖动UISlider，此时touch时间在150ms以内，UIScrollView会认为是拖动自己，从而拦截了event，导致UISlider接受不到滑动的event。但是只要按住UISlider一会再拖动，此时此时touch时间超过150ms，因此滑动的event会发送到UISlider上。</span><br><span class="line">*/</span><br><span class="line">UIView *view = [super hitTest:point withEvent:event];</span><br><span class="line"></span><br><span class="line">if([view isKindOfClass:[UISlider class]]) &#123;</span><br><span class="line">//如果接收事件view是UISlider,则scrollview禁止响应滑动</span><br><span class="line">self.scrollEnabled = NO;</span><br><span class="line">&#125; else &#123;   //如果不是,则恢复滑动</span><br><span class="line">self.scrollEnabled = YES;</span><br><span class="line">&#125;</span><br><span class="line">return view;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>问题补充</strong><br><em>示例Demo中的UISlider是在UIScrollView上的，如果UISlider不是在UIScrollView上，而是直接就在ViewController.view上，那也就会出现拖拽UISlider时却响应了全屏侧滑pop返回手势的问题。</em></li>
+</ul>
+<blockquote>
+<p>在支持全屏侧滑返回的UINavigationController的子类WSLNavigatioController中，遵守协议<uigesturerecognizerdelegate>,实现如下方法：</uigesturerecognizerdelegate></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark -- UIGestureRecognizerDelegate</span><br><span class="line">//触发之后是否响应手势事件</span><br><span class="line">//处理侧滑返回与UISlider的拖动手势冲突</span><br><span class="line">- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch&#123;</span><br><span class="line">//如果手势是触摸的UISlider滑块触发的，侧滑返回手势就不响应</span><br><span class="line">if ([touch.view isKindOfClass:[UISlider class]]) &#123;</span><br><span class="line">return NO;</span><br><span class="line">&#125;</span><br><span class="line">return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四、应用示例"><a href="#四、应用示例" class="headerlink" title="四、应用示例"></a>四、应用示例</h4><p><img src="https://upload-images.jianshu.io/upload_images/1708447-9652702e9c19bc57.gif?imageMogr2/auto-orient/strip" alt="手势冲突应用示例.gif"></p>
+<blockquote>
+<p>好了，俺要去鹊桥跟俺家织女相会咯✌️(*❦ω❦)，就说这么多了，今天七夕节，也祝各位单身猿告白成功，玩的开心O(∩_∩)O哈哈~</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-03c8b6f0c64ef56d.gif?imageMogr2/auto-orient/strip" alt="表白"></p>
+<p>推荐阅读：<br><a href="https://www.jianshu.com/p/a9b1307b305b" target="_blank" rel="noopener">iOS 自定义转场动画</a><br><a href="https://www.jianshu.com/p/9fafd89c97ad" target="_blank" rel="noopener">iOS 瀑布流封装</a><br><a href="https://www.jianshu.com/p/5cf0d241ae12" target="_blank" rel="noopener">WKWebView的使用</a><br><a href="https://www.jianshu.com/p/3b30b9cdd274" target="_blank" rel="noopener">UIScrollView视觉差动画</a><br><a href="https://www.jianshu.com/p/5fc26af852b6" target="_blank" rel="noopener">iOS 传感器集锦</a><br><a href="https://www.jianshu.com/p/35ce7e1076d2" target="_blank" rel="noopener">iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果</a><br><a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a><br><a href="https://www.jianshu.com/p/70cdcdcb6764" target="_blank" rel="noopener">iOS UITableView获取特定位置的cell</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/UIScrollView/" rel="tag"># UIScrollView</a>
+          
+            <a href="/tags/UISlider/" rel="tag"># UISlider</a>
+          
+            <a href="/tags/手势冲突/" rel="tag"># 手势冲突</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/WKWebView的使用/" rel="next" title="iOS WKWebView的使用">
+                <i class="fa fa-chevron-left"></i> iOS WKWebView的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/03/音乐播放器/" rel="prev" title="iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果">
+                iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、前期准备"><span class="nav-number">1.</span> <span class="nav-text">一、前期准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、问题展示"><span class="nav-number">2.</span> <span class="nav-text">二、问题展示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、分析解决问题"><span class="nav-number">3.</span> <span class="nav-text">三、分析解决问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、应用示例"><span class="nav-number">4.</span> <span class="nav-text">四、应用示例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

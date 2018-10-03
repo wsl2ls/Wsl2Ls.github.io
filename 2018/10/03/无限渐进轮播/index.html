@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,UICollectionView,跑马灯,轮播," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="功能描述：WSL_RollView 是基于UICollectionView实现的支持水平和垂直两个方向上的的分页和渐进循环轮播效果，可以设置时间间隔、渐进速率、是否循环、分页宽度和间隔，还支持自定义分页视图的控件，用法和UICollectionView基本一样。  一、实现方法①、 首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。 ②、">
+<meta name="keywords" content="iOS,UICollectionView,跑马灯,轮播">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 无限渐进轮播">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/无限渐进轮播/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="功能描述：WSL_RollView 是基于UICollectionView实现的支持水平和垂直两个方向上的的分页和渐进循环轮播效果，可以设置时间间隔、渐进速率、是否循环、分页宽度和间隔，还支持自定义分页视图的控件，用法和UICollectionView基本一样。  一、实现方法①、 首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。 ②、">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-b45d768d5895dfc1.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-4f6d268a3df79ee2.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-03T10:39:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 无限渐进轮播">
+<meta name="twitter:description" content="功能描述：WSL_RollView 是基于UICollectionView实现的支持水平和垂直两个方向上的的分页和渐进循环轮播效果，可以设置时间间隔、渐进速率、是否循环、分页宽度和间隔，还支持自定义分页视图的控件，用法和UICollectionView基本一样。  一、实现方法①、 首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。 ②、">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1708447-b45d768d5895dfc1.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/无限渐进轮播/"/>
+
+
+
+
+
+  <title>iOS 无限渐进轮播 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/无限渐进轮播/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 无限渐进轮播</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:38:46+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/1708447-b45d768d5895dfc1.gif?imageMogr2/auto-orient/strip" alt="iOS UICollectionView实现跑马灯和轮播效果"></p>
+<blockquote>
+<p>功能描述：<a href="https://github.com/wslcmk/WSL_RollView" target="_blank" rel="noopener">WSL_RollView</a> 是基于UICollectionView实现的支持水平和垂直两个方向上的的分页和渐进循环轮播效果，可以设置时间间隔、渐进速率、是否循环、分页宽度和间隔，还支持自定义分页视图的控件，用法和UICollectionView基本一样。</p>
+</blockquote>
+<h4 id="一、实现方法"><a href="#一、实现方法" class="headerlink" title="一、实现方法"></a>一、实现方法</h4><h5 id="①、-首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。"><a href="#①、-首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。" class="headerlink" title="①、 首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。"></a>①、 首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。</h5><p><img src="https://upload-images.jianshu.io/upload_images/1708447-4f6d268a3df79ee2.gif?imageMogr2/auto-orient/strip" alt="iOS UICollectionView"></p>
+<h5 id="②、对比上面的效果图，我们还需要解决分页的宽度和循环滚动的问题。"><a href="#②、对比上面的效果图，我们还需要解决分页的宽度和循环滚动的问题。" class="headerlink" title="②、对比上面的效果图，我们还需要解决分页的宽度和循环滚动的问题。"></a>②、对比上面的效果图，我们还需要解决分页的宽度和循环滚动的问题。</h5><blockquote>
+<ul>
+<li>自定义分页宽度：默认的分页宽度是UICollectionView的宽度，所以当分页宽度的不等于UICollectionView的宽度或分页间隔不等于0时会出现错误，这时就需要我们通过自定义UICollectionViewFlowLayout来实现效果。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/** 返回值决定了collectionView停止滚动时的偏移量 手指松开后执行</span><br><span class="line">* proposedContentOffset：原本情况下，collectionView停止滚动时最终的偏移量</span><br><span class="line">* velocity 滚动速率，通过这个参数可以了解滚动的方向</span><br><span class="line">*/</span><br><span class="line">- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity&#123;</span><br><span class="line"></span><br><span class="line">if (_scrollStyle == WSLRollViewScrollStylePage) &#123;</span><br><span class="line">CGSize size = self.collectionView.frame.size;</span><br><span class="line">// 计算可见区域的面积</span><br><span class="line">CGRect rect = CGRectMake(proposedContentOffset.x, proposedContentOffset.y, size.width, size.height);</span><br><span class="line">NSArray *array = [super layoutAttributesForElementsInRect:rect];</span><br><span class="line">// 标记 cell 的中点与 UICollectionView 中点最小的间距</span><br><span class="line">CGFloat minDetal = MAXFLOAT;</span><br><span class="line"></span><br><span class="line">if (self.scrollDirection == UICollectionViewScrollDirectionHorizontal)&#123;</span><br><span class="line">// 计算 CollectionView 中点值</span><br><span class="line">CGFloat centerX = proposedContentOffset.x + self.collectionView.frame.size.width * 0.5;</span><br><span class="line">for (UICollectionViewLayoutAttributes *attrs in array)&#123;</span><br><span class="line">if (ABS(minDetal) &gt; ABS(centerX - attrs.center.x))&#123;</span><br><span class="line">minDetal = attrs.center.x - centerX;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return CGPointMake(proposedContentOffset.x + minDetal, proposedContentOffset.y);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">// 计算 CollectionView 中点值</span><br><span class="line">CGFloat centerY = proposedContentOffset.y + self.collectionView.frame.size.height * 0.5;</span><br><span class="line">for (UICollectionViewLayoutAttributes *attrs in array)&#123;</span><br><span class="line">if (ABS(minDetal) &gt; ABS(centerY - attrs.center.y))&#123;</span><br><span class="line">minDetal = attrs.center.y - centerY;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return CGPointMake(proposedContentOffset.x, proposedContentOffset.y + minDetal);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return proposedContentOffset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>循环滚动：思想当然还是3 &gt;4 &gt;0 &gt;1 &gt;2 &gt;3 &gt;4 &gt;0 &gt;1，关键就在于怎么确定弥补两端轮播首尾相连需要增加的cell，前边尾首相连需要UICollectionView可见范围内的数据源后边的元素cell，后边首尾相连需要UICollectionView可见范围内的数据源前边的元素cell</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//获取首尾相连循环滚动时需要用到的元素，并重组数据源</span><br><span class="line">- (void)resetDataSourceForLoop&#123;</span><br><span class="line">if(_loopEnabled == NO)&#123;</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line">if(_scrollDirection == UICollectionViewScrollDirectionHorizontal &amp;&amp; _collectionView.contentSize.width &gt;= self.frame.size.width)&#123;</span><br><span class="line">//用于右侧连接元素数量</span><br><span class="line">_addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(self.frame.size.width - 1, 0)].row + 1 ;</span><br><span class="line">if (_scrollStyle == WSLRollViewScrollStylePage)&#123;</span><br><span class="line">//如果是分页，还需要用于左侧连接元素数量</span><br><span class="line">_addLeftCount = _sourceArray.count - [_collectionView  indexPathForItemAtPoint:CGPointMake(_collectionView.contentSize.width - self.frame.size.width + 1, 0)].row;</span><br><span class="line">&#125;</span><br><span class="line">&#125;else if(_scrollDirection == UICollectionViewScrollDirectionVertical &amp;&amp; _collectionView.contentSize.height &gt;= self.frame.size.height)&#123;</span><br><span class="line">//用于右侧连接元素数量</span><br><span class="line">_addRightCount = [_collectionView  indexPathForItemAtPoint:CGPointMake(0, self.frame.size.height - 1)].row + 1 ;</span><br><span class="line">if (_scrollStyle == WSLRollViewScrollStylePage)&#123;</span><br><span class="line">//用于左侧连接元素数量</span><br><span class="line">_addLeftCount = _sourceArray.count - [_collectionView  indexPathForItemAtPoint:CGPointMake(0, _collectionView.contentSize.height - self.frame.size.height + 1)].row;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">NSArray * rightSubArray = [_sourceArray subarrayWithRange:NSMakeRange(0, _addRightCount)];</span><br><span class="line">//增加右侧连接元素</span><br><span class="line">[_dataSource addObjectsFromArray:rightSubArray];</span><br><span class="line"></span><br><span class="line">if (_scrollStyle == WSLRollViewScrollStylePage)&#123;</span><br><span class="line">NSArray * leftSubArray = [_sourceArray subarrayWithRange:NSMakeRange(_sourceArray.count - _addLeftCount, _addLeftCount)];</span><br><span class="line">//增加左侧连接元素</span><br><span class="line">[_dataSource insertObjects:leftSubArray atIndexes: [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,_addLeftCount)]];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二、WSL-RollView用法"><a href="#二、WSL-RollView用法" class="headerlink" title="二、WSL_RollView用法"></a>二、WSL_RollView用法</h4><blockquote>
+<p>请看WSLRollView.h文件中的注释，代理方法、属性很明朗，用法和UICollectionView基本一样，详情和效果请前往我的Github查看示例：<a href="https://github.com/wslcmk/WSL_RollView" target="_blank" rel="noopener">WSL_RollView</a></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">//  WSLRollView.h</span><br><span class="line">//  WSL_RollView</span><br><span class="line">//</span><br><span class="line">//  Created by 王双龙 on 2018/9/8.</span><br><span class="line">//  Copyright © 2018年 https://www.jianshu.com/u/e15d1f644bea. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">默认cell样式 WSLItemID</span><br><span class="line">*/</span><br><span class="line">@interface WSLRollViewCell : UICollectionViewCell</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@class WSLRollView;</span><br><span class="line"></span><br><span class="line">//代理协议</span><br><span class="line">@protocol WSLRollViewDelegate &lt;NSObject&gt;</span><br><span class="line">@optional</span><br><span class="line">/**</span><br><span class="line">返回itemSize 默认值是CGSizeMake(self.frame.size.width, self.frame.size.height);</span><br><span class="line">*/</span><br><span class="line">- (CGSize)rollView:(WSLRollView *)rollView sizeForItemAtIndex:(NSInteger)index;</span><br><span class="line">/**</span><br><span class="line">item的间隔 默认值0</span><br><span class="line">*/</span><br><span class="line">- (CGFloat)spaceOfItemInRollView:(WSLRollView *)rollView;</span><br><span class="line">/**</span><br><span class="line">内边距 上 左 下 右 默认值UIEdgeInsetsMake(0, 0, 0, 0)</span><br><span class="line">*/</span><br><span class="line">- (UIEdgeInsets)paddingOfRollView:(WSLRollView *)rollView;</span><br><span class="line">/**</span><br><span class="line">点击事件</span><br><span class="line">*/</span><br><span class="line">- (void)rollView:(WSLRollView *)rollView didSelectItemAtIndex:(NSInteger)index;</span><br><span class="line">/**</span><br><span class="line">自定义item样式</span><br><span class="line">*/</span><br><span class="line">- (WSLRollViewCell *)rollView:(WSLRollView *)rollView cellForItemAtIndex:(NSInteger )index;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">滚动样式</span><br><span class="line">*/</span><br><span class="line">typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) &#123;</span><br><span class="line">WSLRollViewScrollStylePage = 0, /** 分页 必须等宽或高*/</span><br><span class="line">WSLRollViewScrollStyleStep   /** 渐进 可以不等宽或高*/</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@interface WSLRollView : UIView</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">原始数据源</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, strong) NSMutableArray * sourceArray;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">是否循环轮播 默认YES</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, assign) BOOL loopEnabled;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">轮播方向 默认是 UICollectionViewScrollDirectionHorizontal 水平</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">轮播样式 默认是 WSLRollViewScrollStylePage 分页</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, assign) WSLRollViewScrollStyle scrollStyle;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">渐进轮播速率 单位是Point/s，以坐标系单位为准 默认60/s 如果为0 表示禁止计时器</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, assign) CGFloat speed;</span><br><span class="line">/**</span><br><span class="line">分页轮播间隔时长 单位是s  默认3s 如果为0 表示禁止计时器</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, assign) CGFloat interval;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">item的间隔 默认值0</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, assign) CGFloat spaceOfItem;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">内边距 上 左 下 右 默认值UIEdgeInsetsMake(0, 0, 0, 0)</span><br><span class="line">*/</span><br><span class="line">@property (nonatomic, assign) UIEdgeInsets padding;</span><br><span class="line"></span><br><span class="line">/** delegate*/</span><br><span class="line">@property (nonatomic, weak) id&lt;WSLRollViewDelegate&gt; delegate;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">初始化方法 direction 滚动方向</span><br><span class="line">*/</span><br><span class="line">- (instancetype)initWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection)direction;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">注册item样式 用法和UICollectionView相似</span><br><span class="line">*/</span><br><span class="line">- (void)registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;</span><br><span class="line">/**</span><br><span class="line">注册item样式 用法和UICollectionView相似</span><br><span class="line">*/</span><br><span class="line">- (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;</span><br><span class="line">/**</span><br><span class="line">用于初始化和获取WSLRollViewCell，自定义cell样式 用法和UICollectionView相似</span><br><span class="line">*/</span><br><span class="line">- (WSLRollViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndex:(NSInteger)index;</span><br><span class="line">/**</span><br><span class="line">刷新数据源</span><br><span class="line">*/</span><br><span class="line">- (void)reloadData;</span><br><span class="line">/**</span><br><span class="line">暂停自动轮播</span><br><span class="line">*/</span><br><span class="line">- (void)pause;</span><br><span class="line">/**</span><br><span class="line">继续自动轮播</span><br><span class="line">*/</span><br><span class="line">- (void)play;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上就是我实现这个效果的过程，示例代码请看这儿<a href="https://github.com/wslcmk/WSL_RollView" target="_blank" rel="noopener">WSL_RollView</a>；如果小伙伴们有其他的实现方法，欢迎再此留言交流😊😊😀😀🤗🤗</p>
+</blockquote>
+<p>推荐阅读：<br><a href="https://www.jianshu.com/p/70cdcdcb6764" target="_blank" rel="noopener">iOS UITableView/UICollectionView获取特定位置的cell</a><br><a href="https://www.jianshu.com/p/b5a55099f4fc" target="_blank" rel="noopener">iOS 图片浏览的放大缩小</a><br><a href="https://www.jianshu.com/p/2aa464ae84ca" target="_blank" rel="noopener">UIScrollerView当前显示3张图</a><br><a href="https://www.jianshu.com/p/a9b1307b305b" target="_blank" rel="noopener">iOS 自定义转场动画</a><br><a href="https://www.jianshu.com/p/9fafd89c97ad" target="_blank" rel="noopener">iOS 瀑布流封装</a><br><a href="https://www.jianshu.com/p/5cf0d241ae12" target="_blank" rel="noopener">WKWebView的使用</a><br><a href="https://www.jianshu.com/p/3b30b9cdd274" target="_blank" rel="noopener">UIScrollView视觉差动画</a><br><a href="https://www.jianshu.com/p/5fc26af852b6" target="_blank" rel="noopener">iOS 传感器集锦</a><br><a href="https://www.jianshu.com/p/35ce7e1076d2" target="_blank" rel="noopener">iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果</a><br><a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/UICollectionView/" rel="tag"># UICollectionView</a>
+          
+            <a href="/tags/跑马灯/" rel="tag"># 跑马灯</a>
+          
+            <a href="/tags/轮播/" rel="tag"># 轮播</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/音乐播放器/" rel="next" title="iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果">
+                <i class="fa fa-chevron-left"></i> iOS 音乐播放器之锁屏歌词+歌词解析+锁屏效果
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/03/UrlScheme/" rel="prev" title="iOS  Url Scheme实现APP间通信、分享">
+                iOS  Url Scheme实现APP间通信、分享 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、实现方法"><span class="nav-number">1.</span> <span class="nav-text">一、实现方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①、-首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。"><span class="nav-number">1.1.</span> <span class="nav-text">①、 首先用UICollectionView和计时器实现一个基本的水平滚动效果，如下图，这个太简单就不在此详述。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#②、对比上面的效果图，我们还需要解决分页的宽度和循环滚动的问题。"><span class="nav-number">1.2.</span> <span class="nav-text">②、对比上面的效果图，我们还需要解决分页的宽度和循环滚动的问题。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、WSL-RollView用法"><span class="nav-number">2.</span> <span class="nav-text">二、WSL_RollView用法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,CoreData,数据库," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Core Data是iOS5之后才出现的一个框架，本质上是对SQLite的一个封装，它提供了对象-关系映射(ORM)的功能，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，通过CoreData管理应用程序的数据模型，可以极大程度减少需要编写的代码数量！   更新于2018.3.7   iOS CoreData (二) 版本升级和数据库迁移">
+<meta name="keywords" content="iOS,CoreData,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS CoreData (一) 增删改查">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/CoreData增删改查/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="Core Data是iOS5之后才出现的一个框架，本质上是对SQLite的一个封装，它提供了对象-关系映射(ORM)的功能，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，通过CoreData管理应用程序的数据模型，可以极大程度减少需要编写的代码数量！   更新于2018.3.7   iOS CoreData (二) 版本升级和数据库迁移">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-e32a49e9bd7fff5c.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-db6f38b894f552a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-62f062d22e12f56b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-778eedac992272cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-d0be3672f4c9a927.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-2c04aae2fc5321f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-b874b8d39633de32.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-01c121f90d3f24bd.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-1196effcca08ddbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-fe5aca149536acd0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-6d4bfdd0075fc410.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-3b7f741f3b31ab77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-e4504b889eb17843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-03T10:16:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS CoreData (一) 增删改查">
+<meta name="twitter:description" content="Core Data是iOS5之后才出现的一个框架，本质上是对SQLite的一个封装，它提供了对象-关系映射(ORM)的功能，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，通过CoreData管理应用程序的数据模型，可以极大程度减少需要编写的代码数量！   更新于2018.3.7   iOS CoreData (二) 版本升级和数据库迁移">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1708447-e32a49e9bd7fff5c.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/CoreData增删改查/"/>
+
+
+
+
+
+  <title>iOS CoreData (一) 增删改查 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/CoreData增删改查/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS CoreData (一) 增删改查</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:15:09+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Core Data是iOS5之后才出现的一个框架，本质上是对SQLite的一个封装，它提供了对象-关系映射(ORM)的功能，即能够将OC对象转化成数据，保存在SQLite数据库文件中，也能够将保存在数据库中的数据还原成OC对象，通过CoreData管理应用程序的数据模型，可以极大程度减少需要编写的代码数量！</p>
+</blockquote>
+<blockquote>
+<p>更新于2018.3.7   <a href="https://www.jianshu.com/p/38e6017ab1e9" target="_blank" rel="noopener">iOS CoreData (二) 版本升级和数据库迁移</a></p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-e32a49e9bd7fff5c.gif?imageMogr2/auto-orient/strip" alt="增删改查.gif"></p>
+<h3 id="1、首先创建一个coreData-模型文件：系统创建或者自己创建"><a href="#1、首先创建一个coreData-模型文件：系统创建或者自己创建" class="headerlink" title="1、首先创建一个coreData 模型文件：系统创建或者自己创建"></a>1、首先创建一个coreData 模型文件：系统创建或者自己创建</h3><p><img src="http://upload-images.jianshu.io/upload_images/1708447-db6f38b894f552a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="系统创建模型文件.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-62f062d22e12f56b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自己创建模型文件.png"></p>
+<p>###2、在data Model 中创建项目中需要用到的实体（Entities），例如，创建一个Student 实体（第一字母必须是大写），以及添加一些name、age、sex 等属性，如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-778eedac992272cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建实体.png"></p>
+<p>###3、生成对应实体的实体类，在此之前要注意下图两个设置部分，否则会引起崩溃现象</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-d0be3672f4c9a927.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="注意1.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-2c04aae2fc5321f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="注意2.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-b874b8d39633de32.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建实体类.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-01c121f90d3f24bd.gif?imageMogr2/auto-orient/strip" alt="创建实体类.gif"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-1196effcca08ddbe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="实体类的四个文件.png"></p>
+<h3 id="4、生成上下文-关联数据库"><a href="#4、生成上下文-关联数据库" class="headerlink" title="4、生成上下文 关联数据库"></a>4、生成上下文 关联数据库</h3><ul>
+<li>NSManagedObjectContext 管理对象，上下文，持久性存储模型对象，处理数据与应用的交互</li>
+<li>NSManagedObjectModel 被管理的数据模型，数据结构</li>
+<li>NSPersistentStoreCoordinator 添加数据库，设置数据存储的名字，位置，存储方式</li>
+<li>NSManagedObject 被管理的数据记录</li>
+<li>NSFetchRequest 数据请求</li>
+<li>NSEntityDescription 表格实体结构</li>
+</ul>
+<h6 id="①、自己创建模型文件时需要以下代码来手动生成上下文，关联数据库"><a href="#①、自己创建模型文件时需要以下代码来手动生成上下文，关联数据库" class="headerlink" title="①、自己创建模型文件时需要以下代码来手动生成上下文，关联数据库"></a>①、自己创建模型文件时需要以下代码来手动生成上下文，关联数据库</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//创建数据库</span><br><span class="line">- (void)createSqlite&#123;</span><br><span class="line"></span><br><span class="line">//1、创建模型对象</span><br><span class="line">//获取模型路径</span><br><span class="line">NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@&quot;Model&quot; withExtension:@&quot;momd&quot;];</span><br><span class="line">//根据模型文件创建模型对象</span><br><span class="line">NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];</span><br><span class="line"></span><br><span class="line">//2、创建持久化存储助理：数据库</span><br><span class="line">//利用模型对象创建助理对象</span><br><span class="line">NSPersistentStoreCoordinator *store = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];</span><br><span class="line"></span><br><span class="line">//数据库的名称和路径</span><br><span class="line">NSString *docStr = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];</span><br><span class="line">NSString *sqlPath = [docStr stringByAppendingPathComponent:@&quot;coreData.sqlite&quot;];</span><br><span class="line">NSLog(@&quot;数据库 path = %@&quot;, sqlPath);</span><br><span class="line">NSURL *sqlUrl = [NSURL fileURLWithPath:sqlPath];</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">//设置数据库相关信息 添加一个持久化存储库并设置类型和路径，NSSQLiteStoreType：SQLite作为存储库</span><br><span class="line">[store addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:sqlUrl options:nil error:&amp;error];</span><br><span class="line"></span><br><span class="line">if (error) &#123;</span><br><span class="line">NSLog(@&quot;添加数据库失败:%@&quot;,error);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">NSLog(@&quot;添加数据库成功&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//3、创建上下文 保存信息 对数据库进行操作</span><br><span class="line">NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];</span><br><span class="line"></span><br><span class="line">//关联持久化助理</span><br><span class="line">context.persistentStoreCoordinator = store;</span><br><span class="line">_context = context;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="②、系统创建模型文件时会自动生成关联数据库的代码，在iOS10以下和iOS10之后生成的不一样，出现了一个新类NSPersistentContainer。"><a href="#②、系统创建模型文件时会自动生成关联数据库的代码，在iOS10以下和iOS10之后生成的不一样，出现了一个新类NSPersistentContainer。" class="headerlink" title="②、系统创建模型文件时会自动生成关联数据库的代码，在iOS10以下和iOS10之后生成的不一样，出现了一个新类NSPersistentContainer。"></a>②、系统创建模型文件时会自动生成关联数据库的代码，在iOS10以下和iOS10之后生成的不一样，出现了一个新类NSPersistentContainer。</h6><blockquote>
+<p>NSPersistentContainer是一个容器,封装了应用程序中的CoreData Stack（核心数据栈堆），简化了创建和管理的核心堆栈的数据处理创建NSManagedObjectModel，NSPersistentStoreCoordinator,NSManagedObjectContext。详情可以看看这篇文章：<a href="http://blog.csdn.net/u013263917/article/details/53277708" target="_blank" rel="noopener">http://blog.csdn.net/u013263917/article/details/53277708</a></p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-fe5aca149536acd0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="iOS10以下系统创建模型文件时自动生成关联数据库的代码(转摘).jpeg"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-6d4bfdd0075fc410.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="iOS10之后系统自动生成的广联数据库的代码.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-3b7f741f3b31ab77.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NSPersistentContainer.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;</span><br><span class="line"></span><br><span class="line">NSPersistentContainer * container = appDelegate.persistentContainer;</span><br><span class="line"></span><br><span class="line">//返回沙盒中存储数据库的文件夹URL路径，这是一个静态方法，表示数据库的文件路径是唯一的</span><br><span class="line">NSURL * url = [NSPersistentContainer defaultDirectoryURL];</span><br><span class="line"></span><br><span class="line">NSManagedObjectContext *viewContext = container.viewContext;</span><br><span class="line"></span><br><span class="line">NSManagedObjectModel *managedObjectModel = container.managedObjectModel;</span><br><span class="line"></span><br><span class="line">NSPersistentStoreCoordinator *persistentStoreCoordinator = container.persistentStoreCoordinator;</span><br><span class="line"></span><br><span class="line">//使用存储调度器快速在多线程中操作数据库，效率非常高(比主线程操作块50倍！！！)</span><br><span class="line">- (void)performBackgroundTask:(void (^)(NSManagedObjectContext *))block;</span><br></pre></td></tr></table></figure>
+<p>###5.增删改查排</p>
+<ul>
+<li>写入数据 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 1.根据Entity名称和NSManagedObjectContext获取一个新的继承于NSManagedObject的子类Student</span><br><span class="line">Student * student = [NSEntityDescription  insertNewObjectForEntityForName:@&quot;Student&quot;  inManagedObjectContext:_context];</span><br><span class="line"></span><br><span class="line">//2.根据表Student中的键值，给NSManagedObject对象赋值</span><br><span class="line">student.name = [NSString stringWithFormat:@&quot;Mr-%d&quot;,arc4random()%100];</span><br><span class="line">student.age = arc4random()%20;</span><br><span class="line">student.sex = arc4random()%2 == 0 ?  @&quot;美女&quot; : @&quot;帅哥&quot; ;</span><br><span class="line">student.height = arc4random()%180;</span><br><span class="line">student.number = arc4random()%100</span><br><span class="line"></span><br><span class="line">//   3.保存插入的数据</span><br><span class="line">NSError *error = nil;</span><br><span class="line">if ([_context save:&amp;error]) &#123;</span><br><span class="line">[self alertViewWithMessage:@&quot;数据插入到数据库成功&quot;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line">[self alertViewWithMessage:[NSString stringWithFormat:@&quot;数据插入到数据库失败, %@&quot;,error]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除数据</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">- (void)deleteData&#123;</span><br><span class="line"></span><br><span class="line">//创建删除请求</span><br><span class="line">NSFetchRequest *deleRequest = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line"></span><br><span class="line">//删除条件</span><br><span class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;age &lt; %d&quot;, 10];</span><br><span class="line">deleRequest.predicate = pre;</span><br><span class="line"></span><br><span class="line">//返回需要删除的对象数组</span><br><span class="line">NSArray *deleArray = [_context executeFetchRequest:deleRequest error:nil];</span><br><span class="line"></span><br><span class="line">//从数据库中删除</span><br><span class="line">for (Student *stu in deleArray) &#123;</span><br><span class="line">[_context deleteObject:stu];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">NSError *error = nil;</span><br><span class="line">//保存--记住保存</span><br><span class="line">if ([_context save:&amp;error]) &#123;</span><br><span class="line">[self alertViewWithMessage:@&quot;删除 age &lt; 10 的数据&quot;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line">NSLog(@&quot;删除数据失败, %@&quot;, error);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>更新修改</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//更新，修改</span><br><span class="line">- (void)updateData&#123;</span><br><span class="line"></span><br><span class="line">//创建查询请求</span><br><span class="line">NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;sex = %@&quot;, @&quot;帅哥&quot;];</span><br><span class="line">request.predicate = pre;</span><br><span class="line"></span><br><span class="line">//发送请求</span><br><span class="line">NSArray *resArray = [_context executeFetchRequest:request error:nil];</span><br><span class="line"></span><br><span class="line">//修改</span><br><span class="line">for (Student *stu in resArray) &#123;</span><br><span class="line">stu.name = @&quot;且行且珍惜_iOS&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//保存</span><br><span class="line">NSError *error = nil;</span><br><span class="line">if ([_context save:&amp;error]) &#123;</span><br><span class="line">[self alertViewWithMessage:@&quot;更新所有帅哥的的名字为“且行且珍惜_iOS”&quot;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line">NSLog(@&quot;更新数据失败, %@&quot;, error);</span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>读取查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">//读取查询</span><br><span class="line">- (void)readData&#123;</span><br><span class="line"></span><br><span class="line">/* 谓词的条件指令</span><br><span class="line">1.比较运算符 &gt; 、&lt; 、== 、&gt;= 、&lt;= 、!=</span><br><span class="line">例：@&quot;number &gt;= 99&quot;</span><br><span class="line"></span><br><span class="line">2.范围运算符：IN 、BETWEEN</span><br><span class="line">例：@&quot;number BETWEEN &#123;1,5&#125;&quot;</span><br><span class="line">@&quot;address IN &#123;&apos;shanghai&apos;,&apos;nanjing&apos;&#125;&quot;</span><br><span class="line"></span><br><span class="line">3.字符串本身:SELF</span><br><span class="line">例：@&quot;SELF == &apos;APPLE&apos;&quot;</span><br><span class="line"></span><br><span class="line">4.字符串相关：BEGINSWITH、ENDSWITH、CONTAINS</span><br><span class="line">例：  @&quot;name CONTAIN[cd] &apos;ang&apos;&quot;  //包含某个字符串</span><br><span class="line">@&quot;name BEGINSWITH[c] &apos;sh&apos;&quot;    //以某个字符串开头</span><br><span class="line">@&quot;name ENDSWITH[d] &apos;ang&apos;&quot;    //以某个字符串结束</span><br><span class="line"></span><br><span class="line">5.通配符：LIKE</span><br><span class="line">例：@&quot;name LIKE[cd] &apos;*er*&apos;&quot;   //*代表通配符,Like也接受[cd].</span><br><span class="line">@&quot;name LIKE[cd] &apos;???er*&apos;&quot;</span><br><span class="line"></span><br><span class="line">*注*: 星号 &quot;*&quot; : 代表0个或多个字符</span><br><span class="line">问号 &quot;?&quot; : 代表一个字符</span><br><span class="line"></span><br><span class="line">6.正则表达式：MATCHES</span><br><span class="line">例：NSString *regex = @&quot;^A.+e$&quot;; //以A开头，e结尾</span><br><span class="line">@&quot;name MATCHES %@&quot;,regex</span><br><span class="line"></span><br><span class="line">注:[c]*不区分大小写 , [d]不区分发音符号即没有重音符号, [cd]既不区分大小写，也不区分发音符号。</span><br><span class="line"></span><br><span class="line">7. 合计操作</span><br><span class="line">ANY，SOME：指定下列表达式中的任意元素。比如，ANY children.age &lt; 18。</span><br><span class="line">ALL：指定下列表达式中的所有元素。比如，ALL children.age &lt; 18。</span><br><span class="line">NONE：指定下列表达式中没有的元素。比如，NONE children.age &lt; 18。它在逻辑上等于NOT (ANY ...)。</span><br><span class="line">IN：等于SQL的IN操作，左边的表达必须出现在右边指定的集合中。比如，name IN &#123; &apos;Ben&apos;, &apos;Melissa&apos;, &apos;Nick&apos; &#125;。</span><br><span class="line"></span><br><span class="line">提示:</span><br><span class="line">1. 谓词中的匹配指令关键字通常使用大写字母</span><br><span class="line">2. 谓词中可以使用格式字符串</span><br><span class="line">3. 如果通过对象的key</span><br><span class="line">path指定匹配条件，需要使用%K</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">//创建查询请求</span><br><span class="line">NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">//查询条件</span><br><span class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;sex = %@&quot;, @&quot;美女&quot;];</span><br><span class="line">request.predicate = pre;</span><br><span class="line"></span><br><span class="line">// 从第几页开始显示</span><br><span class="line">// 通过这个属性实现分页</span><br><span class="line">//request.fetchOffset = 0;</span><br><span class="line">// 每页显示多少条数据</span><br><span class="line">//request.fetchLimit = 6;</span><br><span class="line"></span><br><span class="line">//发送查询请求</span><br><span class="line">NSArray *resArray = [_context executeFetchRequest:request error:nil];</span><br><span class="line"></span><br><span class="line">[self alertViewWithMessage:@&quot;查询所有的美女&quot;];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>排序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//排序</span><br><span class="line">- (void)sort&#123;</span><br><span class="line">//创建排序请求</span><br><span class="line">NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@&quot;Student&quot;];</span><br><span class="line">//实例化排序对象</span><br><span class="line">NSSortDescriptor *ageSort = [NSSortDescriptor sortDescriptorWithKey:@&quot;age&quot;ascending:YES];</span><br><span class="line">NSSortDescriptor *numberSort = [NSSortDescriptor sortDescriptorWithKey:@&quot;number&quot;ascending:YES];</span><br><span class="line">request.sortDescriptors = @[ageSort,numberSort];</span><br><span class="line">//发送请求</span><br><span class="line">NSError *error = nil;</span><br><span class="line">NSArray *resArray = [_context executeFetchRequest:request error:&amp;error];</span><br><span class="line">if (error == nil) &#123;</span><br><span class="line">[self alertViewWithMessage:@&quot;按照age和number排序&quot;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line">NSLog(@&quot;排序失败, %@&quot;, error);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#####CoreData调试:</p>
+<p>打开Product，选择Edit Scheme.<br>选择Arguments，在下面的ArgumentsPassed On Launch中添加下面两个选项，如图：<br>(1)-com.apple.CoreData.SQLDebug<br>(2)1</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-e4504b889eb17843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="CoreData调试.png"></p>
+<p>参考文献：<br><a href="http://www.jianshu.com/p/880dd63c5f5e" target="_blank" rel="noopener">http://www.jianshu.com/p/880dd63c5f5e</a><br><a href="http://www.jianshu.com/p/79ba72810d29" target="_blank" rel="noopener">http://www.jianshu.com/p/79ba72810d29</a><br><a href="http://www.jianshu.com/p/3e4f33b5b013" target="_blank" rel="noopener">http://www.jianshu.com/p/3e4f33b5b013</a><br><a href="http://blog.csdn.net/u013263917/article/details/53277708" target="_blank" rel="noopener">http://blog.csdn.net/u013263917/article/details/53277708</a><br><a href="http://blog.csdn.net/u013263917/article/details/53277863" target="_blank" rel="noopener">http://blog.csdn.net/u013263917/article/details/53277863</a></p>
+<p>示例Github：<a href="https://github.com/wslcmk/CoreDataLearn.git" target="_blank" rel="noopener">CoreDataLearn</a></p>
+<blockquote>
+<p>更新于2018.3.7   <a href="https://www.jianshu.com/p/38e6017ab1e9" target="_blank" rel="noopener">iOS CoreData (二) 版本升级和数据库迁移</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/CoreData/" rel="tag"># CoreData</a>
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/打包Framework/" rel="next" title="iOS 打包Framework">
+                <i class="fa fa-chevron-left"></i> iOS 打包Framework
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/03/CoreData版本升级和数据库迁移/" rel="prev" title="iOS CoreData(二)版本升级和数据库迁移">
+                iOS CoreData(二)版本升级和数据库迁移 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、首先创建一个coreData-模型文件：系统创建或者自己创建"><span class="nav-number">1.</span> <span class="nav-text">1、首先创建一个coreData 模型文件：系统创建或者自己创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、生成上下文-关联数据库"><span class="nav-number">2.</span> <span class="nav-text">4、生成上下文 关联数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#①、自己创建模型文件时需要以下代码来手动生成上下文，关联数据库"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">①、自己创建模型文件时需要以下代码来手动生成上下文，关联数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#②、系统创建模型文件时会自动生成关联数据库的代码，在iOS10以下和iOS10之后生成的不一样，出现了一个新类NSPersistentContainer。"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">②、系统创建模型文件时会自动生成关联数据库的代码，在iOS10以下和iOS10之后生成的不一样，出现了一个新类NSPersistentContainer。</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

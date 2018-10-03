@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,传感器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="指纹识别、运动传感器、加速计、环境光感、距离传感器、磁力计、陀螺仪   ##一、指纹识别  应用：指纹解锁、指纹登录、指纹支付   苹果从iPhone5S开始，具有指纹识别技术，从iOS8.0之后苹果允许第三方 App 使用 Touch ID进行身份验证。连续三次指纹识别错误后，会自动弹出密码框，通过Touch ID的密码进行身份验证，如果此时取消密码验证，再2次指纹识别失败后，也就是 3 +">
+<meta name="keywords" content="iOS,传感器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 传感器集锦">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/传感器集锦/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="指纹识别、运动传感器、加速计、环境光感、距离传感器、磁力计、陀螺仪   ##一、指纹识别  应用：指纹解锁、指纹登录、指纹支付   苹果从iPhone5S开始，具有指纹识别技术，从iOS8.0之后苹果允许第三方 App 使用 Touch ID进行身份验证。连续三次指纹识别错误后，会自动弹出密码框，通过Touch ID的密码进行身份验证，如果此时取消密码验证，再2次指纹识别失败后，也就是 3 +">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-77d332b828cc3ba3.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-d59134bc16eb649b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-4d69990c9edffeca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-518728c961f0e78f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-6c05485d5a684cac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-d0cea0f0bdf6b215.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-fc8b66639ef0290c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-3cf20d73fef7fbcd.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1708447-d256a99d81899421.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-03T10:21:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 传感器集锦">
+<meta name="twitter:description" content="指纹识别、运动传感器、加速计、环境光感、距离传感器、磁力计、陀螺仪   ##一、指纹识别  应用：指纹解锁、指纹登录、指纹支付   苹果从iPhone5S开始，具有指纹识别技术，从iOS8.0之后苹果允许第三方 App 使用 Touch ID进行身份验证。连续三次指纹识别错误后，会自动弹出密码框，通过Touch ID的密码进行身份验证，如果此时取消密码验证，再2次指纹识别失败后，也就是 3 +">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1708447-77d332b828cc3ba3.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/传感器集锦/"/>
+
+
+
+
+
+  <title>iOS 传感器集锦 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/传感器集锦/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 传感器集锦</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:20:22+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>指纹识别、运动传感器、加速计、环境光感、距离传感器、磁力计、陀螺仪</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-77d332b828cc3ba3.gif?imageMogr2/auto-orient/strip" alt="效果预览.gif"></p>
+<p>##一、指纹识别</p>
+<blockquote>
+<p>应用：指纹解锁、指纹登录、指纹支付</p>
+</blockquote>
+<blockquote>
+<p>苹果从iPhone5S开始，具有指纹识别技术，从iOS8.0之后苹果允许第三方 App 使用 Touch ID进行身份验证。<br>连续三次指纹识别错误后，会自动弹出密码框，通过Touch ID的密码进行身份验证，如果此时取消密码验证，再2次指纹识别失败后，也就是 3 + 2 = 5次指纹识别失败后，Touch ID功能被锁定，就只能通过密码来进行身份验证和解锁Touch ID 功能。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-d59134bc16eb649b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="指纹.png"></p>
+<p>全部代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;LocalAuthentication/LocalAuthentication.h&gt;</span><br><span class="line"></span><br><span class="line">-(void)OnTouchIDBtn:(UIButton *)sender&#123;</span><br><span class="line">//判断设备是否支持Touch ID </span><br><span class="line">if ([[UIDevice currentDevice].systemVersion floatValue] &lt; 8.0) &#123;</span><br><span class="line">[self createAlterView:@&quot;不支持指纹识别&quot;];</span><br><span class="line">return;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">LAContext *ctx = [[LAContext alloc] init];</span><br><span class="line">//设置 输入密码 按钮的标题</span><br><span class="line">ctx.localizedFallbackTitle = @&quot;验证登录密码&quot;;</span><br><span class="line">//设置 取消 按钮的标题 iOS10之后</span><br><span class="line">ctx.localizedCancelTitle = @&quot;取消&quot;;</span><br><span class="line">//检测指纹数据库更改 验证成功后返回一个NSData对象，否则返回nil</span><br><span class="line">//ctx.evaluatedPolicyDomainState;</span><br><span class="line">// 这个属性应该是类似于支付宝的指纹开启应用，如果你打开他解锁之后，按Home键返回桌面，再次进入支付宝是不需要录入指纹的。因为这个属性可以设置一个时间间隔，在时间间隔内是不需要再次录入。默认是0秒，最长可以设置5分钟</span><br><span class="line">//ctx.touchIDAuthenticationAllowableReuseDuration = 5;</span><br><span class="line"></span><br><span class="line">NSError * error;</span><br><span class="line">_localizedReason = @&quot;通过Home键验证已有手机指纹&quot;;</span><br><span class="line">// 判断设备是否支持指纹识别</span><br><span class="line">if ([ctx canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&amp;error]) &#123;</span><br><span class="line"></span><br><span class="line">// 验证指纹是否匹配，需要弹出输入密码的弹框的话：iOS9之后用 LAPolicyDeviceOwnerAuthentication ；    iOS9之前用LAPolicyDeviceOwnerAuthenticationWithBiometrics</span><br><span class="line">[ctx evaluatePolicy:LAPolicyDeviceOwnerAuthentication localizedReason:_localizedReason reply:^(BOOL success, NSError * error) &#123;</span><br><span class="line">if (success) &#123;</span><br><span class="line">[self createAlterView:@&quot;指纹验证成功&quot;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line"></span><br><span class="line">// 错误码 error.code</span><br><span class="line">NSLog(@&quot;指纹识别错误描述 %@&quot;,error.description);</span><br><span class="line"></span><br><span class="line">// -1: 连续三次指纹识别错误</span><br><span class="line">// -2: 在TouchID对话框中点击了取消按钮</span><br><span class="line">// -3: 在TouchID对话框中点击了输入密码按钮</span><br><span class="line">// -4: TouchID对话框被系统取消，例如按下Home或者电源键</span><br><span class="line">// -8: 连续五次指纹识别错误，TouchID功能被锁定，下一次需要输入系统密码</span><br><span class="line">NSString * message;</span><br><span class="line">switch (error.code) &#123;</span><br><span class="line">case -1://LAErrorAuthenticationFailed</span><br><span class="line">message = @&quot;已经连续三次指纹识别错误了，请输入密码验证&quot;;</span><br><span class="line">_localizedReason = @&quot;指纹验证失败&quot;;</span><br><span class="line">break;</span><br><span class="line">case -2:</span><br><span class="line">message = @&quot;在TouchID对话框中点击了取消按钮&quot;;</span><br><span class="line">return ;</span><br><span class="line">break;</span><br><span class="line">case -3:</span><br><span class="line">message = @&quot;在TouchID对话框中点击了输入密码按钮&quot;;</span><br><span class="line">break;</span><br><span class="line">case -4:</span><br><span class="line">message = @&quot;TouchID对话框被系统取消，例如按下Home或者电源键或者弹出密码框&quot;;</span><br><span class="line">break;</span><br><span class="line">case -8:</span><br><span class="line">message = @&quot;TouchID已经被锁定,请前往设置界面重新启用&quot;;</span><br><span class="line">break;</span><br><span class="line">default:</span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line">[self createAlterView:message];</span><br><span class="line">&#125;</span><br><span class="line">&#125;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line"></span><br><span class="line">if (error.code == -8) &#123;</span><br><span class="line">[self createAlterView:@&quot;由于五次识别错误TouchID已经被锁定,请前往设置界面重新启用&quot;];</span><br><span class="line">&#125;else&#123;</span><br><span class="line">[self createAlterView:@&quot;TouchID没有设置指纹,请前往设置&quot;];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)createAlterView:(NSString *)message&#123;</span><br><span class="line">UIAlertController * vc = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:message preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">[self presentViewController:vc animated:NO completion:^(void)&#123;</span><br><span class="line">[NSThread sleepForTimeInterval:1.0];</span><br><span class="line">[vc dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##二、运动传感器/加速计/陀螺仪</p>
+<blockquote>
+<p>应用：水平位置测试、摇一摇、计步器、游戏、特效动画</p>
+</blockquote>
+<blockquote>
+<p>加速计和运动传感器主要监测设备在X、Y、Z轴上的加速度 ，根据加速度数值，就可以判断出在各个方向上的作用力度，陀螺仪主要用来监测设备的旋转方向和角度。</p>
+</blockquote>
+<blockquote>
+<p>这几个传感器都是依赖于苹果官方CoreMotion框架，用法都差不多，先判断各个传感器是否可用开启，然后设置各个传感器的采集频率，接着就开始采集数据，并返回采集到的运动信息参数：各个方向的重力加速度、旋转方向角度等等。</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-4d69990c9edffeca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网络图片.png"><br><img src="http://upload-images.jianshu.io/upload_images/1708447-518728c961f0e78f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="网络图片.jpg"></p>
+<ul>
+<li>示例效果：图片旋转的第一张图片用于检测设备是否处于水平位置，第二张图是设备无论在竖直/水平方向上怎么旋转，图片都保持于水平/竖直方向垂直。滚动小球不仅用了加速计，还用到了CoreMotion框架中行为管理CMMotionManager中的碰撞、重力行为，和动力学属性：摩擦、密度、弹力、阻力等</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-6c05485d5a684cac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片旋转.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-d0cea0f0bdf6b215.gif?imageMogr2/auto-orient/strip" alt="滚动小球.gif"></p>
+<ul>
+<li>运动传感器的示例代码如下，其它的用法都差不多，只是相关的方法名称、属性名称和返回的参数类型和值不同，详情可以看demo，注释还算清晰；对于眼镜的绘制可以看下我之前的笔记：<a href="http://www.jianshu.com/p/d6e090ed542b" target="_blank" rel="noopener">CALayer系列、CGContextRef、UIBezierPath、文本属性Attributes</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">self.motionManager= [[CMMotionManager alloc] init];</span><br><span class="line">//判断设备运动传感器是否可用</span><br><span class="line">if(!self.motionManager.isDeviceMotionAvailable)&#123;</span><br><span class="line">NSLog(@&quot;手机没有此功能，换肾吧&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//更新速率是100Hz</span><br><span class="line">self.motionManager.deviceMotionUpdateInterval = 0.1;</span><br><span class="line">//开始更新采集数据</span><br><span class="line">//需要时采集数据</span><br><span class="line">//[motionManager startDeviceMotionUpdates];</span><br><span class="line">//实时获取数据</span><br><span class="line">[self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion * _Nullable motion, NSError * _Nullable error) &#123;</span><br><span class="line">//获取X的值</span><br><span class="line">double x = motion.gravity.x;</span><br><span class="line">//手机水平位置测试</span><br><span class="line">//判断y是否小于0，大于等于-1.0</span><br><span class="line">if(motion.gravity.y &lt; 0.0 &amp;&amp; motion.gravity.y &gt;= -1.0)&#123;</span><br><span class="line">//设置旋转</span><br><span class="line">[imageView1 setRotation:80 * motion.gravity.y];</span><br><span class="line">&#125;else if (motion.gravity.z * -1 &gt; 0 &amp;&amp; motion.gravity.z * -1 &lt;= 1.0)&#123;</span><br><span class="line">[imageView1 setRotation:80 - (80 * motion.gravity.z * -1)];</span><br><span class="line">&#125;  </span><br><span class="line">//X、Y方向上的夹角</span><br><span class="line">double rotation = atan2(motion.gravity.x, motion.gravity.y) - M_PI;</span><br><span class="line">NSLog(@&quot;%.2f&quot;,rotation);</span><br><span class="line">//图片始终保持垂直方向</span><br><span class="line">imageView2.transform = CGAffineTransformMakeRotation(rotation);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<p>##三、环境光感处理器</p>
+<blockquote>
+<p>应用：常见的比如说根据环境的亮度去调整屏幕的亮度，在黑暗情况下，手机会自动调暗屏幕亮度，以防刺眼；iPhone 系统相机拍照时光线暗时会自动打开闪光灯；共享单车在黑暗的情况下扫码时检测到特别暗就自动提示打开闪光灯。</p>
+<ul>
+<li>利用摄像头获取环境光感参数，通过摄像头采集环境参数，然后在代理方法中输出，光感越小，环境越暗，然后根据需要做相应的操作。</li>
+<li>示例中是环境变暗后就自动提示是否打开闪光灯，打开之后，环境变亮后会自动提示是否关闭闪光灯。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">// 1.获取硬件设备</span><br><span class="line">AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];</span><br><span class="line">if (device == nil) &#123;</span><br><span class="line">NSLog(@&quot;该换肾了&quot;);</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2.创建输入流</span><br><span class="line">AVCaptureDeviceInput *input = [[AVCaptureDeviceInput alloc]initWithDevice:device error:nil];</span><br><span class="line">// 3.创建设备输出流</span><br><span class="line">AVCaptureVideoDataOutput *output = [[AVCaptureVideoDataOutput alloc] init];</span><br><span class="line">[output setSampleBufferDelegate:self queue:dispatch_get_main_queue()];</span><br><span class="line">// AVCaptureSession属性</span><br><span class="line">_session = [[AVCaptureSession alloc]init];</span><br><span class="line">// 设置为高质量采集率</span><br><span class="line">[_session setSessionPreset:AVCaptureSessionPresetHigh];</span><br><span class="line">// 添加会话输入和输出</span><br><span class="line">if ([_session canAddInput:input]) &#123;</span><br><span class="line">[_session addInput:input];</span><br><span class="line">&#125;</span><br><span class="line">if ([_session canAddOutput:output]) &#123;</span><br><span class="line">[_session addOutput:output];</span><br><span class="line">&#125;</span><br><span class="line">// 9.启动会话</span><br><span class="line">[_session startRunning];</span><br><span class="line"></span><br><span class="line">#pragma mark- AVCaptureVideoDataOutputSampleBufferDelegate的方法</span><br><span class="line">- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection &#123;</span><br><span class="line"></span><br><span class="line">CFDictionaryRef metadataDict = CMCopyDictionaryOfAttachments(NULL,sampleBuffer, kCMAttachmentMode_ShouldPropagate);</span><br><span class="line">NSDictionary *metadata = [[NSMutableDictionary alloc] initWithDictionary:(__bridge NSDictionary*)metadataDict];</span><br><span class="line">CFRelease(metadataDict);</span><br><span class="line">NSDictionary *exifMetadata = [[metadata objectForKey:(NSString *)kCGImagePropertyExifDictionary] mutableCopy];</span><br><span class="line">float brightnessValue = [[exifMetadata objectForKey:(NSString *)kCGImagePropertyExifBrightnessValue] floatValue];</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;环境光感 ： %f&quot;,brightnessValue);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 根据brightnessValue的值来打开和关闭闪光灯</span><br><span class="line">AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];</span><br><span class="line">BOOL result = [device hasTorch];// 判断设备是否有闪光灯</span><br><span class="line">if ((brightnessValue &lt; 0) &amp;&amp; result) &#123;// 打开闪光灯</span><br><span class="line"></span><br><span class="line">if(device.torchMode == AVCaptureTorchModeOn)&#123;</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">UIAlertController * alertVC  = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;小主是否要打开闪光灯？&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">UIAlertAction * openAction = [UIAlertAction actionWithTitle:@&quot;打开&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">[device lockForConfiguration:nil];</span><br><span class="line">[device setTorchMode: AVCaptureTorchModeOn];//开</span><br><span class="line">[device unlockForConfiguration];</span><br><span class="line">&#125;];</span><br><span class="line">[alertVC addAction:openAction];</span><br><span class="line">UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) &#123;&#125;];</span><br><span class="line">[alertVC addAction:cancleAction];</span><br><span class="line">[self presentViewController:alertVC animated:NO completion:nil];</span><br><span class="line">&#125;else if((brightnessValue &gt; 0) &amp;&amp; result) &#123;// 关闭闪光灯</span><br><span class="line"></span><br><span class="line">if(device.torchMode == AVCaptureTorchModeOn)&#123;</span><br><span class="line">UIAlertController * alertVC  = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;小主是否要关闭闪光灯？&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">UIAlertAction * openAction = [UIAlertAction actionWithTitle:@&quot;关闭&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">[device lockForConfiguration:nil];</span><br><span class="line">[device setTorchMode: AVCaptureTorchModeOff];//关</span><br><span class="line">[device unlockForConfiguration];</span><br><span class="line">&#125;];</span><br><span class="line">[alertVC addAction:openAction];</span><br><span class="line">UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) &#123; &#125;];</span><br><span class="line">[alertVC addAction:cancleAction];</span><br><span class="line">[self presentViewController:alertVC animated:NO completion:nil];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##四、距离传感器</p>
+<blockquote>
+<p>距离传感器: 感应是否有其他物体靠近屏幕,iPhone手机中内置了距离传感器，位置在手机的听筒附近，当我们在打电话或听微信语音的时候靠近听筒，手机的屏幕会自动熄灭，这就靠距离传感器来控制</p>
+<ul>
+<li>首先打开距离传感器，然后添加通知UIDeviceProximityStateDidChangeNotification监听有物品靠近还是离开，从而做出操作，记得最后要关闭距离传感器，有始有终哦。</li>
+<li>示例中是默认用扬声器播放音乐，当有物体(比如耳朵)靠近听筒附近时就切换听筒播放音乐，物体离开后就继续用扬声器播放音乐。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">- (void)distanceSensor&#123;</span><br><span class="line">// 打开距离传感器</span><br><span class="line">[UIDevice currentDevice].proximityMonitoringEnabled = YES;</span><br><span class="line">// 通过通知监听有物品靠近还是离开</span><br><span class="line">[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityStateDidChange:) name:UIDeviceProximityStateDidChangeNotification object:nil];</span><br><span class="line">AVAudioSession *audioSession = [AVAudioSession sharedInstance];</span><br><span class="line">//默认情况下扬声器播放</span><br><span class="line">[audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];</span><br><span class="line">[audioSession setActive:YES error:nil];</span><br><span class="line">NSString * path = [[NSBundle mainBundle] pathForResource:@&quot;SeeYouAgain&quot; ofType:@&quot;mp3&quot;];</span><br><span class="line">if(path == nil)&#123;</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line">_play = [[AVPlayer alloc] initWithURL:[NSURL fileURLWithPath:path]];</span><br><span class="line">[_play play];</span><br><span class="line">&#125;</span><br><span class="line">- (void)proximityStateDidChange:(NSNotification *)note</span><br><span class="line">&#123;</span><br><span class="line">if ([UIDevice currentDevice].proximityState) &#123;</span><br><span class="line">NSLog(@&quot;有东西靠近&quot;);</span><br><span class="line">//听筒播放</span><br><span class="line">[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];</span><br><span class="line">&#125; else &#123;</span><br><span class="line">NSLog(@&quot;有物体离开&quot;);</span><br><span class="line">//扬声器播放</span><br><span class="line">[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">- (void)dealloc&#123;</span><br><span class="line">[_play pause];</span><br><span class="line">_play = nil;</span><br><span class="line">//关闭距离传感器</span><br><span class="line">[UIDevice currentDevice].proximityMonitoringEnabled = NO;</span><br><span class="line">[self removeObserver];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##五、磁力计<br>请看我的上一篇博客：<a href="http://www.jianshu.com/p/9d9718876663" target="_blank" rel="noopener">iOS仿系统指南针</a><br><img src="http://upload-images.jianshu.io/upload_images/1708447-fc8b66639ef0290c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果.png"></p>
+<p>传࿆送࿆之࿆门࿆ ——&gt; <a href="https://github.com/wslcmk/SensorDemo.git" target="_blank" rel="noopener">传感器集锦</a> </p>
+<p>温馨提示：请真机调试看效果。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-3cf20d73fef7fbcd.gif?imageMogr2/auto-orient/strip" alt="赞࿆赞࿆.gif"></p>
+<p>欢迎扫描下方二维码关注——iOS开发进阶之路——微信公众号：iOS2679114653<br>本公众号是一个iOS开发者们的分享，交流，学习平台，会不定时的发送技术干货，源码,也欢迎大家积极踊跃投稿，(择优上头条) _分享自己开发攻城的过程，心得，相互学习，共同进步，成为攻城狮中的翘楚！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1708447-d256a99d81899421.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="iOS开发进阶之路.jpg"></p>
+<p>参考文献：<br><a href="http://www.jianshu.com/p/8aa3525f8d48" target="_blank" rel="noopener">http://www.jianshu.com/p/8aa3525f8d48</a><br><a href="http://www.jianshu.com/p/a561428df32f" target="_blank" rel="noopener">http://www.jianshu.com/p/a561428df32f</a><br><a href="http://www.jianshu.com/p/233be81b8ead" target="_blank" rel="noopener">http://www.jianshu.com/p/233be81b8ead</a><br><a href="http://www.jianshu.com/p/f308d0aeced0" target="_blank" rel="noopener">http://www.jianshu.com/p/f308d0aeced0</a><br><a href="http://download.csdn.net/detail/tonny_guan/7099955" target="_blank" rel="noopener">http://download.csdn.net/detail/tonny_guan/7099955</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/传感器/" rel="tag"># 传感器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/指南针/" rel="next" title="iOS 仿系统指南针">
+                <i class="fa fa-chevron-left"></i> iOS 仿系统指南针
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/03/搭建博客/" rel="prev" title="Hexo + Github搭建自己的博客">
+                Hexo + Github搭建自己的博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

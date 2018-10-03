@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,UrlScheme," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  ####应用：   第三方分享的SDK就">
+<meta name="keywords" content="iOS,UrlScheme">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS  Url Scheme实现APP间通信、分享">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/UrlScheme/index.html">
+<meta property="og:site_name" content="DoubleDragon&#39;s Blog">
+<meta property="og:description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  ####应用：   第三方分享的SDK就">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-6a7ee0f8fd32b04e.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-dbd1b18cd37cf594.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-0938c3b9a6c37494.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-31f4114191e20f33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-162180610a8191cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-d2761a5cb5bebee2.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-7b55d0bdba0d2518.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-03T10:53:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS  Url Scheme实现APP间通信、分享">
+<meta name="twitter:description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  ####应用：   第三方分享的SDK就">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1708447-6a7ee0f8fd32b04e.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/03/UrlScheme/"/>
+
+
+
+
+
+  <title>iOS  Url Scheme实现APP间通信、分享 | DoubleDragon's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DoubleDragon's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Rome was not built in one day. Study hard and make progress every day.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/03/UrlScheme/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="且行且珍惜_iOS">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DoubleDragon's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS  Url Scheme实现APP间通信、分享</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-03T18:52:01+08:00">
+                2018-10-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS的点点滴滴/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS的点点滴滴</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/1708447-6a7ee0f8fd32b04e.gif?imageMogr2/auto-orient/strip" alt="示例总效果.gif"></p>
+<h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><blockquote>
+<p>URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。</p>
+</blockquote>
+<p>####应用：</p>
+<blockquote>
+<ul>
+<li>第三方分享的SDK就是通过这种方式来实现分享的，我们将需要分享的数据传递给SDK，SDK通过OpenURL来打开第三方应用传递数据，返回时SDK来处理OpenUrl的参数，实现查看分享的回调。</li>
+<li>从浏览器中某一页面的点击事件可以打开对应客户端的某一个界面，就是通过协议 URL Scheme:// + 参数 来完成唤醒跳转客户端界面的。</li>
+<li>调用微信、支付宝等客户端完成支付的功能。<ul>
+<li>三方应用调用系统所带的地图软件。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>####示例：<br>接下来就以我之前写的<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>和<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>两个Demo为例，让我们看下怎么可以让<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>并进行通信、分享：也就是说让 <a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a> 像微信、QQ、新浪一样支持第三方社交分享。</p>
+<p>#####一、配置<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>的应用信息，添加Url Scheme</p>
+<blockquote>
+<p>要跳转到别人的app，就要知道别人的app的跳转协议是什么，需要传入什么参数，如果我们希望别人打开我们的app，也需要在info.plist中配置跳转协议，然后再重写AppDelegate中的 openUrl方法来处理逻辑参数。</p>
+</blockquote>
+<ul>
+<li><p>给 <a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a> 添加Url Scheme<br><img src="https://upload-images.jianshu.io/upload_images/1708447-dbd1b18cd37cf594.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加URL Scheme.png"></p>
+</li>
+<li><p>重写<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>中AppDelegate中的openUrl方法，当<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>被唤起时会执行openUrl方法，我们可以在方法里根据传入的参数的做出处理。如果只想允许在特定情况下才能被唤起，比如说分享，就可以对传入的openUrl加以验证，符合要求return YES ，否则返回NO。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">//第三方应用打开本应用启动</span><br><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</span><br><span class="line">// Override point for customization after application launch.</span><br><span class="line">//第三方应用打开本应用启动</span><br><span class="line">if(launchOptions[UIApplicationLaunchOptionsURLKey] != nil)&#123;</span><br><span class="line">[self application:application handleOpenURL:launchOptions[UIApplicationLaunchOptionsURLKey]];</span><br><span class="line">&#125;</span><br><span class="line">return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">iOS 9.0 以下 程序在运行过程中才能调用</span><br><span class="line">*/</span><br><span class="line">- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url&#123;</span><br><span class="line">NSString *text = [[url host] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line">NSLog(@&quot;URL scheme:%@&quot;, [url scheme]);</span><br><span class="line">NSLog(@&quot;URL query: %@&quot;, [url query]);</span><br><span class="line">return YES;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line">iOS 9.0 之后    程序在运行过程中才能调用</span><br><span class="line">三方唤起本程序后执行的方法</span><br><span class="line">return YES 表示允许唤起本程序 </span><br><span class="line">*/</span><br><span class="line">- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *)options&#123;  </span><br><span class="line">NSLog(@&quot;URL scheme:%@&quot;, [url scheme]);</span><br><span class="line">//参数</span><br><span class="line">NSLog(@&quot;URL host:%@&quot;, [url host]);</span><br><span class="line">UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@&quot;分享&quot; message:[url host] delegate:self cancelButtonTitle:nil otherButtonTitles:@&quot;分享完成&quot;, nil];</span><br><span class="line">[alertView show];</span><br><span class="line">return YES;</span><br><span class="line">&#125;                            </span><br><span class="line">- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex&#123;</span><br><span class="line">//返回URL scheme = wsl123456的主应用</span><br><span class="line">NSURL * url = [NSURL URLWithString:@&quot;wsl123456://success&quot;];</span><br><span class="line">[[UIApplication sharedApplication] openURL:url options:nil completionHandler:^(BOOL success) &#123;</span><br><span class="line">&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过浏览器打开唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>，测试一下，输入的地址是” WSLAPP://wslmeiksjkfdfkfkfhskfhskfhskj “（Url Scheme://+ 参数字符串），参数可以为空。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-0938c3b9a6c37494.gif?imageMogr2/auto-orient/strip" alt=" 通过浏览器打开唤起WSL"></p>
+<p>#####二、在<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>中添加事件，通过Url Scheme来唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>，并传参</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- (IBAction)shareToWSL:(id)sender &#123;</span><br><span class="line"></span><br><span class="line">//不带参数</span><br><span class="line">NSString * wslUrlScheme = @&quot;WSLAPP://&quot;;</span><br><span class="line">//如果参数含有特殊字符或汉字，需要转码，否则这个URL不合法，就会唤起失败；参数字符串的格式可以自定义，只要便于自己到时候解析就行</span><br><span class="line">NSString * parameterStr = [@&quot;name=wsl&amp;weight=保密&quot; stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">//不带参数</span><br><span class="line">//    NSURL * url = [NSURL URLWithString:wslScheme];</span><br><span class="line">//带参数</span><br><span class="line">//WSLAPP://name=wsl&amp;weight=保密</span><br><span class="line">NSURL * url = [NSURL URLWithString:[wslUrlScheme stringByAppendingString:parameterStr]];</span><br><span class="line"></span><br><span class="line">//iOS 10以下</span><br><span class="line">//    [[UIApplication sharedApplication] openURL:url];</span><br><span class="line">//iOS 10以上</span><br><span class="line">[[UIApplication sharedApplication] openURL:url options:nil completionHandler:^(BOOL success) &#123;</span><br><span class="line">&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#####三、唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>之后需要做的处理</p>
+<blockquote>
+<p>唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>之后，<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>根据传入的参数进行界面数据的处理，处理完成之后，我们需要自动返回主应用<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>，同时传递数据处理的结果。相当于<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>回调唤起<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>，过程同一、二步。</p>
+</blockquote>
+<ul>
+<li>给<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a> 也添加Url Scheme，便于从<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>返回主应用<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-31f4114191e20f33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="给UIActivityViewController系统原生分享也添加Url Scheme"></p>
+<ul>
+<li>重写<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>中AppDelegate中的openUrl方法，在返回<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>应用时根据从<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>返回的数据处理结果做出反应。</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-162180610a8191cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重写UIActivityViewController系统原生分享的openUrl方法"></p>
+<blockquote>
+<p>以上就是通过Url Scheme实现APP间相互跳转、传递数据、通信、分享功能的过程。</p>
+</blockquote>
+<blockquote>
+<p>经过以上操作内容，小伙伴们是不是对其中的步骤有种似曾相识的感觉呢？没错，集成的第三方分享SDK就是通过这种方式来实现分享的，只不过它们把数据、方法都封装到了SDK中。</p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/734c3eff8feb" target="_blank" rel="noopener"> iOS 9 通用链接（Universal Links）</a> 通过传统的HTTP链接来启动APP。</p>
+</blockquote>
+<blockquote>
+<p><a href="https://segmentfault.com/a/1190000005967865?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">微信中打开三方应用</a></p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-d2761a5cb5bebee2.gif?imageMogr2/auto-orient/strip" alt="加油"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1708447-7b55d0bdba0d2518.gif?imageMogr2/auto-orient/strip" alt="赞个"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat-reward-image.jpeg" alt="且行且珍惜_iOS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay-reward-image.jpeg" alt="且行且珍惜_iOS 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/UrlScheme/" rel="tag"># UrlScheme</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/03/无限渐进轮播/" rel="next" title="iOS 无限渐进轮播">
+                <i class="fa fa-chevron-left"></i> iOS 无限渐进轮播
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://upload.jianshu.io/collections/images/1661007/艾玛·沃特森.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240"
+                alt="且行且珍惜_iOS" />
+            
+              <p class="site-author-name" itemprop="name">且行且珍惜_iOS</p>
+              <p class="site-description motion-element" itemprop="description">※ 微信公众号：iOS2679114653 ※ QQ：1685527540</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wsl2ls" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/e15d1f644bea" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介："><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">且行且珍惜_iOS</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
