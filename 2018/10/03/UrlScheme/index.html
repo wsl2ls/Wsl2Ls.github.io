@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  ####应用：   第三方分享的SDK就">
+<meta name="description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  应用：  第三方分享的SDK就是通过这种">
 <meta name="keywords" content="iOS,UrlScheme">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS  Url Scheme实现APP间通信、分享">
 <meta property="og:url" content="http://yoursite.com/2018/10/03/UrlScheme/index.html">
 <meta property="og:site_name" content="DoubleDragon&#39;s Blog">
-<meta property="og:description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  ####应用：   第三方分享的SDK就">
+<meta property="og:description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  应用：  第三方分享的SDK就是通过这种">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-6a7ee0f8fd32b04e.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-dbd1b18cd37cf594.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-162180610a8191cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-d2761a5cb5bebee2.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-7b55d0bdba0d2518.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-10-03T10:53:27.000Z">
+<meta property="og:updated_time" content="2018-10-04T06:24:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS  Url Scheme实现APP间通信、分享">
-<meta name="twitter:description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  ####应用：   第三方分享的SDK就">
+<meta name="twitter:description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  应用：  第三方分享的SDK就是通过这种">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1708447-6a7ee0f8fd32b04e.gif?imageMogr2/auto-orient/strip">
 
 
@@ -296,7 +296,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-04T14:24:26+08:00">
+                2018-10-04
+              </time>
             
           </span>
 
@@ -354,8 +366,7 @@
 <h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><blockquote>
 <p>URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。</p>
 </blockquote>
-<p>####应用：</p>
-<blockquote>
+<h4 id="应用："><a href="#应用：" class="headerlink" title="应用："></a>应用：</h4><blockquote>
 <ul>
 <li>第三方分享的SDK就是通过这种方式来实现分享的，我们将需要分享的数据传递给SDK，SDK通过OpenURL来打开第三方应用传递数据，返回时SDK来处理OpenUrl的参数，实现查看分享的回调。</li>
 <li>从浏览器中某一页面的点击事件可以打开对应客户端的某一个界面，就是通过协议 URL Scheme:// + 参数 来完成唤醒跳转客户端界面的。</li>
@@ -366,8 +377,7 @@
 </ul>
 </blockquote>
 <p>####示例：<br>接下来就以我之前写的<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>和<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>两个Demo为例，让我们看下怎么可以让<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>并进行通信、分享：也就是说让 <a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a> 像微信、QQ、新浪一样支持第三方社交分享。</p>
-<p>#####一、配置<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>的应用信息，添加Url Scheme</p>
-<blockquote>
+<h5 id="一、配置WSL的应用信息，添加Url-Scheme"><a href="#一、配置WSL的应用信息，添加Url-Scheme" class="headerlink" title="一、配置WSL的应用信息，添加Url Scheme"></a>一、配置<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>的应用信息，添加Url Scheme</h5><blockquote>
 <p>要跳转到别人的app，就要知道别人的app的跳转协议是什么，需要传入什么参数，如果我们希望别人打开我们的app，也需要在info.plist中配置跳转协议，然后再重写AppDelegate中的 openUrl方法来处理逻辑参数。</p>
 </blockquote>
 <ul>
@@ -381,10 +391,8 @@
 <li>通过浏览器打开唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>，测试一下，输入的地址是” WSLAPP://wslmeiksjkfdfkfkfhskfhskfhskj “（Url Scheme://+ 参数字符串），参数可以为空。</li>
 </ul>
 <p><img src="https://upload-images.jianshu.io/upload_images/1708447-0938c3b9a6c37494.gif?imageMogr2/auto-orient/strip" alt=" 通过浏览器打开唤起WSL"></p>
-<p>#####二、在<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>中添加事件，通过Url Scheme来唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>，并传参</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- (IBAction)shareToWSL:(id)sender &#123;</span><br><span class="line"></span><br><span class="line">//不带参数</span><br><span class="line">NSString * wslUrlScheme = @&quot;WSLAPP://&quot;;</span><br><span class="line">//如果参数含有特殊字符或汉字，需要转码，否则这个URL不合法，就会唤起失败；参数字符串的格式可以自定义，只要便于自己到时候解析就行</span><br><span class="line">NSString * parameterStr = [@&quot;name=wsl&amp;weight=保密&quot; stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">//不带参数</span><br><span class="line">//    NSURL * url = [NSURL URLWithString:wslScheme];</span><br><span class="line">//带参数</span><br><span class="line">//WSLAPP://name=wsl&amp;weight=保密</span><br><span class="line">NSURL * url = [NSURL URLWithString:[wslUrlScheme stringByAppendingString:parameterStr]];</span><br><span class="line"></span><br><span class="line">//iOS 10以下</span><br><span class="line">//    [[UIApplication sharedApplication] openURL:url];</span><br><span class="line">//iOS 10以上</span><br><span class="line">[[UIApplication sharedApplication] openURL:url options:nil completionHandler:^(BOOL success) &#123;</span><br><span class="line">&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#####三、唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>之后需要做的处理</p>
-<blockquote>
+<h5 id="二、在UIActivityViewController系统原生分享中添加事件，通过Url-Scheme来唤起WSL，并传参"><a href="#二、在UIActivityViewController系统原生分享中添加事件，通过Url-Scheme来唤起WSL，并传参" class="headerlink" title="二、在UIActivityViewController系统原生分享中添加事件，通过Url Scheme来唤起WSL，并传参"></a>二、在<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>中添加事件，通过Url Scheme来唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>，并传参</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- (IBAction)shareToWSL:(id)sender &#123;</span><br><span class="line"></span><br><span class="line">//不带参数</span><br><span class="line">NSString * wslUrlScheme = @&quot;WSLAPP://&quot;;</span><br><span class="line">//如果参数含有特殊字符或汉字，需要转码，否则这个URL不合法，就会唤起失败；参数字符串的格式可以自定义，只要便于自己到时候解析就行</span><br><span class="line">NSString * parameterStr = [@&quot;name=wsl&amp;weight=保密&quot; stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line"></span><br><span class="line">//不带参数</span><br><span class="line">//    NSURL * url = [NSURL URLWithString:wslScheme];</span><br><span class="line">//带参数</span><br><span class="line">//WSLAPP://name=wsl&amp;weight=保密</span><br><span class="line">NSURL * url = [NSURL URLWithString:[wslUrlScheme stringByAppendingString:parameterStr]];</span><br><span class="line"></span><br><span class="line">//iOS 10以下</span><br><span class="line">//    [[UIApplication sharedApplication] openURL:url];</span><br><span class="line">//iOS 10以上</span><br><span class="line">[[UIApplication sharedApplication] openURL:url options:nil completionHandler:^(BOOL success) &#123;</span><br><span class="line">&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="三、唤起WSL之后需要做的处理"><a href="#三、唤起WSL之后需要做的处理" class="headerlink" title="三、唤起WSL之后需要做的处理"></a>三、唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>之后需要做的处理</h5><blockquote>
 <p>唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>之后，<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>根据传入的参数进行界面数据的处理，处理完成之后，我们需要自动返回主应用<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>，同时传递数据处理的结果。相当于<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>回调唤起<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享</a>，过程同一、二步。</p>
 </blockquote>
 <ul>
@@ -630,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介："><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介："><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用："><span class="nav-number">2.</span> <span class="nav-text">应用：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、配置WSL的应用信息，添加Url-Scheme"><span class="nav-number">2.1.</span> <span class="nav-text">一、配置WSL的应用信息，添加Url Scheme</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、在UIActivityViewController系统原生分享中添加事件，通过Url-Scheme来唤起WSL，并传参"><span class="nav-number">2.2.</span> <span class="nav-text">二、在UIActivityViewController系统原生分享中添加事件，通过Url Scheme来唤起WSL，并传参</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、唤起WSL之后需要做的处理"><span class="nav-number">2.3.</span> <span class="nav-text">三、唤起WSL之后需要做的处理</span></a></li></ol></li></ol></div>
             
 
           </div>
