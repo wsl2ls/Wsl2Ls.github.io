@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-162180610a8191cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-d2761a5cb5bebee2.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1708447-7b55d0bdba0d2518.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-10-04T06:24:26.000Z">
+<meta property="og:updated_time" content="2018-10-04T06:34:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS  Url Scheme实现APP间通信、分享">
 <meta name="twitter:description" content="简介： URL Scheme就是一个可以让app相互之间可以跳转的对外接口。通过给APP定义一个唯一的URL路径来从外部快速的打开这个指定的APP，每个app的URL Scheme都是不一样的，如果存在一样的URL Scheme，那么系统就会响应先安装那个app的URL Scheme，因为后安装的app的URL Scheme被覆盖掉了，是不能被调用的。  应用：  第三方分享的SDK就是通过这种">
@@ -296,19 +296,7 @@
             
 
             
-              <span class="post-meta-divider">|</span>
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-04T14:24:26+08:00">
-                2018-10-04
-              </time>
             
           </span>
 
@@ -337,6 +325,17 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/03/UrlScheme/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/10/03/UrlScheme/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -376,7 +375,7 @@
 </li>
 </ul>
 </blockquote>
-<p>####示例：<br>接下来就以我之前写的<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>和<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>两个Demo为例，让我们看下怎么可以让<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>并进行通信、分享：也就是说让 <a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a> 像微信、QQ、新浪一样支持第三方社交分享。</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><p>接下来就以我之前写的<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>和<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>两个Demo为例，让我们看下怎么可以让<a href="https://www.jianshu.com/p/b6b44662dfda" target="_blank" rel="noopener">UIActivityViewController系统原生分享-仿简书分享</a>唤起<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">iOS开源小项目-WSL</a>并进行通信、分享：也就是说让 <a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a> 像微信、QQ、新浪一样支持第三方社交分享。</p>
 <h5 id="一、配置WSL的应用信息，添加Url-Scheme"><a href="#一、配置WSL的应用信息，添加Url-Scheme" class="headerlink" title="一、配置WSL的应用信息，添加Url Scheme"></a>一、配置<a href="https://www.jianshu.com/p/0b7da06101ab" target="_blank" rel="noopener">WSL</a>的应用信息，添加Url Scheme</h5><blockquote>
 <p>要跳转到别人的app，就要知道别人的app的跳转协议是什么，需要传入什么参数，如果我们希望别人打开我们的app，也需要在info.plist中配置跳转协议，然后再重写AppDelegate中的 openUrl方法来处理逻辑参数。</p>
 </blockquote>
@@ -516,6 +515,16 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -638,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介："><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用："><span class="nav-number">2.</span> <span class="nav-text">应用：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、配置WSL的应用信息，添加Url-Scheme"><span class="nav-number">2.1.</span> <span class="nav-text">一、配置WSL的应用信息，添加Url Scheme</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、在UIActivityViewController系统原生分享中添加事件，通过Url-Scheme来唤起WSL，并传参"><span class="nav-number">2.2.</span> <span class="nav-text">二、在UIActivityViewController系统原生分享中添加事件，通过Url Scheme来唤起WSL，并传参</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、唤起WSL之后需要做的处理"><span class="nav-number">2.3.</span> <span class="nav-text">三、唤起WSL之后需要做的处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介："><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用："><span class="nav-number">2.</span> <span class="nav-text">应用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例："><span class="nav-number">3.</span> <span class="nav-text">示例：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、配置WSL的应用信息，添加Url-Scheme"><span class="nav-number">3.1.</span> <span class="nav-text">一、配置WSL的应用信息，添加Url Scheme</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、在UIActivityViewController系统原生分享中添加事件，通过Url-Scheme来唤起WSL，并传参"><span class="nav-number">3.2.</span> <span class="nav-text">二、在UIActivityViewController系统原生分享中添加事件，通过Url Scheme来唤起WSL，并传参</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、唤起WSL之后需要做的处理"><span class="nav-number">3.3.</span> <span class="nav-text">三、唤起WSL之后需要做的处理</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -808,6 +817,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://wsl2ls.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/10/03/UrlScheme/';
+          this.page.identifier = '2018/10/03/UrlScheme/';
+          this.page.title = 'iOS  Url Scheme实现APP间通信、分享';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wsl2ls.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -820,10 +849,6 @@
   
 
 
-
-
-
-  
 
 
 
